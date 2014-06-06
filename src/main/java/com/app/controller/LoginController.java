@@ -2,6 +2,8 @@ package com.app.controller;
 
 import com.app.model.UserInfo;
 import com.app.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.POST;
@@ -16,12 +18,14 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private UserService userService;
 
     @POST
     @Path("/login")
     public void login(UserInfo userInfo) {
+        LOG.debug("login called with " + userInfo);
         userService.login(userInfo);
     }
 }

@@ -16,6 +16,17 @@ public class UserInfo {
     private String email;
     private String password;
 
+    public UserInfo() {
+
+    }
+
+    public UserInfo(int id, String userName, String email, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getUserName() {
 
         return userName;
@@ -41,5 +52,21 @@ public class UserInfo {
         this.password = password;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
