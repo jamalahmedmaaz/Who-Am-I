@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.api;
 
 import com.app.model.UserInfo;
 import com.app.service.UserService;

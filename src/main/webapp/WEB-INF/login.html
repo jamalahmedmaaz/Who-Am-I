@@ -1,0 +1,63 @@
+/**
+* Created by cassandra on 6/7/14.
+*/
+<html>
+<head>
+    <title>Todo List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/ui/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/ui/css/ui.notify.css"/>
+    <link rel="stylesheet" type="text/css" href="/uimm/css/tipsy.css"/>
+
+    <script src="/ui/js/lib/jquery-1.7.1.js"></script>
+    <script src="/ui/js/lib/jquery-ui-1.8.18.js"></script>
+    <script src="/ui/js/lib/jquery.notify.js"></script>
+    <script src="/ui/js/lib/jquery.tipsy.js"></script>
+
+    <script src="/ui/js/lib/json2.js"></script>
+    <script src="/ui/js/lib/underscore.js"></script>
+    <script src="/ui/js/lib/backbone.js"></script>
+
+    <script src="/ui/js/todo-list.js"></script>
+
+    <script type="content/template" id="task-template">
+        <div class="show">
+            <%= description %>
+            <span class="icon done-task" title="Toggle done"></span>
+            <span class="icon edit-task" title="Edit task"></span>
+            <span class="icon remove-task" title="Remove task"></span>
+        </div>
+        <div class="edit">
+            <input type="text"/>
+        </div>
+    </script>
+</head>
+
+<body>
+<header>
+    <h1>Todo List</h1>
+</header>
+
+<section id="main">
+    <div>
+        <input id="create-task" type="text" placeholder="Create new task..."
+               title="Press enter to submit task"/>
+    </div>
+    <ul id="tasks"></ul>
+    <div id="notices" style="display:hidden">
+        <div id="notice-template">
+            <a class="ui-notify-cross ui-notify-close" href="#">x</a>
+
+            <h1>#{title}</h1>
+
+            <p>#{text}</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div>created by Michał Orman</div>
+    <div>&copy; 2012 Consileon Polska</div>
+</footer>
+</body>
+</html>

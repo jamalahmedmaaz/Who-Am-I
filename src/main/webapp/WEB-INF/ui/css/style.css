@@ -1,0 +1,207 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/****************************************************/
+
+html {
+    background: #F7F7F7;
+    padding: 40px 0;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #c0c0c0;
+    box-shadow: 0 5px 10px #e0e0e0;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #859BAB;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 2px #bbb;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.6em;
+    margin-top: 40px;
+    color: #999;
+}
+
+input[type='text'] {
+    width: 98%;
+    background: #f7f7f7;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 1.2em;
+    color: #999;
+    box-shadow: 0 5px 5px #e0e0e0 inset;
+}
+
+input[type='text']:focus {
+    box-shadow: 0 0 5px #859BAB;
+}
+
+::-webkit-input-placeholder {
+    opacity: 0.4;
+}
+
+:-moz-placeholder {
+    opacity: 0.4;
+}
+
+ul#tasks {
+    border: 1px solid #C0C0C0;
+    margin: 20px 0;
+    border-radius: 10px;
+    height: 500px;
+    background-color: #F7F7F7;
+    box-shadow: inset 0 5px 10px #e0e0e0;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#tasks li {
+    padding: 10px 50px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    background: #FAFAFA;
+}
+
+#tasks li:nth-child(odd) {
+    background: white;
+}
+
+#tasks li:nth-child(even) {
+    background: #f0f0f0;
+}
+
+#tasks li:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#tasks li:last-child {
+    box-shadow: 0 5px 10px #E0E0E0;
+}
+
+#tasks li:hover {
+    background: #f6f6f6;
+}
+
+#tasks li.done {
+    text-decoration: line-through;
+    color: #c0c0c0;
+    background: #EAEAEA;
+}
+
+#tasks .icon {
+    position: absolute;
+    top: 6px;
+    opacity: 0.2;
+    display: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+#tasks .remove-task {
+    right: 20px;
+    background: url('/assets/img/remove.png') no-repeat;
+}
+
+#tasks .edit-task {
+    right: 44px;
+    background: url('/assets/img/edit.png') no-repeat;
+}
+
+#tasks .done-task {
+    left: 20px;
+    display: block;
+    background: url('/assets/img/done.png') no-repeat;
+}
+
+#tasks li:hover .icon {
+    display: block;
+}
+
+#tasks .icon:hover {
+    opacity: 0.5;
+    background-color: #e4e4e4;
+    border-radius: 4px;
+}
+
+#tasks li.done .done-task {
+    opacity: 1;
+}
+
+#tasks li.editing .edit-task {
+    opacity: 1;
+}
+
+#tasks li.editing .show,
+#tasks li .edit {
+    display: none;
+}
+
+#tasks li.editing .edit {
+    display: block;
+}
+
+.modal-footer {
+    border-top: 0px;
+}
