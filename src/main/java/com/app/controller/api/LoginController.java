@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 public class LoginController {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
+
     @Autowired
     private UserService userService;
 
