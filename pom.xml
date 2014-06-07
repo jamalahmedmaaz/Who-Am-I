@@ -7,10 +7,13 @@
     <groupId>Who-Am-I</groupId>
     <artifactId>Who-Am-I</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
     <properties>
         <spring.version>3.2.8.RELEASE</spring.version>
         <jersey.version>2.7</jersey.version>
     </properties>
+
     <!--TODO remove duplicates -->
     <dependencies>
         <dependency>
@@ -162,7 +165,7 @@
                 <version>6.1.26</version>
                 <configuration>
                     <webAppConfig>
-                        <contextPath>/</contextPath>
+                        <contextPath>/WhoAmI</contextPath>
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
