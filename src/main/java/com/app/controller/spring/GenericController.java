@@ -14,7 +14,8 @@ public class GenericController {
     private static final Logger LOG = LoggerFactory.getLogger(GenericController.class);
 
     @RequestMapping("/login")
-    public String helloWorld(Model model) {
+    public String login(Model model) {
+        LOG.debug("login request ");
         return "logMeIn";
     }
 }
