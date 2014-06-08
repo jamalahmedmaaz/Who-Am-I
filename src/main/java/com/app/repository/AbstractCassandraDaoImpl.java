@@ -1,12 +1,21 @@
 package com.app.repository;
 
 import com.app.model.AbstractEntity;
+import com.datastax.driver.core.ConsistencyLevel;
+import com.datastax.driver.core.RegularStatement;
+import com.datastax.driver.core.Session;
+import com.datastax.driver.core.SimpleStatement;
+import com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.springframework.cassandra.core.SessionCallback;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Created by cassandra on 6/9/14.
@@ -16,9 +25,11 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
 
     private final Class<T> daoType;
 
+    @Resource(name = "cassandraTemplate")
+    private CassandraTemplate cassandraTemplate;
+
     public AbstractCassandraDaoImpl() {
         this.daoType = getEntityType();
-
     }
 
     protected abstract Logger getLogger();
@@ -35,6 +46,13 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
 
     @Override
     public T findById(ID id) {
+        try {
+            Map<String, Serializable> properties = Maps.newHashMapWithExpectedSize(1);
+            properties.put("id", id);
+            List<T> entities = findByProperties(properties);
+        } catch (Exception e) {
+
+        }
         return null;
     }
 
@@ -59,8 +77,30 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
     }
 
     @Override
-    public List<T> findByProperties(Map<String, ? extends Serializable> keyValuePairs) {
-        return null;
+    public List<T> findByProperties(final Map<String, ? extends Serializable> keyValuePairs) {
+        try {
+            SessionCallback<T> sessionCallback = new SessionCallback() {
+                @Override
+                public Object doInSession(Session session) throws DataAccessException {
+                    StringBuffer query = new StringBuffer("SELECT * FROM " + getEntityType())
+                            .append(" ").append("WHERE ");
+                    int counter = 0;
+                    for (Map.Entry<String, ? extends Serializable> entry : keyValuePairs.entrySet()) {
+                        if (counter > 0) {
+                            query.append(" AND ");
+                        }
+                        query.append(entry.getKey()).append(" = ").append(entry.getValue());
+                        counter++;
+                    }
+                    RegularStatement statement = (RegularStatement) new SimpleStatement(query.toString()).setConsistencyLevel(ConsistencyLevel.ALL);
+                    return session.execute(statement);
+                }
+            };
+            return (List<T>) cassandraTemplate.execute(sessionCallback);
+        } catch (DataAccessException e) {
+            getLogger().error("findByExample failed: " + e);
+            throw e;
+        }
     }
 
     @Override
