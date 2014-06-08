@@ -1,7 +1,7 @@
 package com.app.service;
 
 import com.app.model.UserInfo;
-import com.app.repository.CassandraRespository;
+import com.app.repository.UserInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private CassandraRespository cassandraRespository;
+    private UserInfoDao userInfoDao;
 
     @Override
     public void login(UserInfo userInfo) {
-        cassandraRespository.findByUserName(userInfo.getUserName());
+        UserInfo userInfo1 = userInfoDao.findById(userInfo.getId());
     }
 }

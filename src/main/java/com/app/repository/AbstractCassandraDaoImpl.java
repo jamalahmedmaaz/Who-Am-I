@@ -6,7 +6,6 @@ import com.datastax.driver.core.RegularStatement;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.SimpleStatement;
 import com.google.common.collect.Maps;
-import org.slf4j.Logger;
 import org.springframework.cassandra.core.SessionCallback;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.cassandra.core.CassandraTemplate;
@@ -32,7 +31,7 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
         this.daoType = getEntityType();
     }
 
-    protected abstract Logger getLogger();
+    protected abstract org.apache.log4j.Logger getLogger();
 
     @SuppressWarnings("unchecked")
     public Class<T> getEntityType() {
