@@ -7,25 +7,19 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-
-    <!-- This tag registers the DefaultAnnotationHandlerMapping and
-         AnnotationMethodHandlerAdapter beans that are required for Spring MVC  -->
     <mvc:annotation-driven/>
 
     <!-- View Resolver for JSPs -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".html"/>
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <!-- This tag allows for mapping the DispatcherServlet to "/" -->
     <mvc:default-servlet-handler/>
 
     <!-- resources exclusions from servlet mapping -->
-    <mvc:resources mapping="/ui/assets/**" location="classpath:/META-INF/resources/webjars/"/>
-    <mvc:resources mapping="/ui/css/**" location="/css/"/>
-    <mvc:resources mapping="/ui/img/**" location="/img/"/>
-    <mvc:resources mapping="/ui/js/**" location="/js/"/>
+    <mvc:resources mapping="/resources/**" location="/resources/ui/"/>
 
 </beans>

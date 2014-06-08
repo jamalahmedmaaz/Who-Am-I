@@ -1,17 +1,20 @@
-<html>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <html>
 <title>Login</title>
-<link href="../ui/css/bootstrap.css" rel="stylesheet">
-<link href="../ui/css/stylesheet.css" rel="stylesheet">
-<style>
+        <head>
+        <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/css/stylesheet.css" />" rel="stylesheet">
+        <style>
     body {
-        background: url(../ui/img/1.jpg) no-repeat center center fixed;
+        background: url("<c:url value="/resources/img/1.jpg" />") no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
     }
 </style>
-<body style="">
+        </head>
+        <body style="">
 <div class="login-container">
     <div class="login-header bordered">
         <h4>Sign in</h4>
