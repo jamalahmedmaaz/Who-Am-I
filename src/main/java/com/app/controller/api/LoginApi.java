@@ -16,9 +16,9 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("whoami")
 @Produces(MediaType.APPLICATION_JSON)
-public class LoginController {
+public class LoginApi {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoginApi.class);
 
     @Autowired
     private UserService userService;

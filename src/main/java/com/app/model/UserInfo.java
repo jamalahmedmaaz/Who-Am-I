@@ -1,6 +1,5 @@
 package com.app.model;
 
-import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
 /**
@@ -8,16 +7,13 @@ import org.springframework.data.cassandra.mapping.Table;
  */
 
 @Table
-public class UserInfo {
+public class UserInfo extends AbstractEntity {
 
-    @PrimaryKey
-    private int id;
     private String userName;
     private String email;
     private String password;
 
     public UserInfo() {
-
     }
 
     public UserInfo(int id, String userName, String email, String password) {
@@ -50,14 +46,6 @@ public class UserInfo {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

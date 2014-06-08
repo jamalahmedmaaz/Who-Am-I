@@ -2,7 +2,7 @@
         <html>
         <title>Login</title>
         <head>
-        <link href="<c:url value="/resources/img/background.jpg" />" rel="shortcut icon">
+        <link href="<c:url value="/resources/img/Tab.jpg" />" rel="shortcut icon">
         <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/css/stylesheet.css" />" rel="stylesheet">
         <style>
