@@ -1,53 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>Bootstrap Login Form</title>
-    <meta name="generator" content="Bootply"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="ui/css/bootstrap.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link href="ui/css/styles.css" rel="stylesheet">
-</head>
-<body>
-<!--login modal-->
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
-                </button>
-                <h1 class="text-center">Login</h1>
-            </div>
-            <div class="modal-body">
-                <form class="form col-md-12 center-block">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" placeholder="Email">
+<html>
+<title>Login</title>
+<link href="../ui/css/bootstrap.css" rel="stylesheet">
+<link href="../ui/css/stylesheet.css" rel="stylesheet">
+<style>
+    body {
+        background: url(../ui/img/1.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<body style="">
+<div class="login-container">
+    <div class="login-header bordered">
+        <h4>Sign in</h4>
+    </div>
+    <hr>
+    <form>
+        <div class="login-field">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Username">
+            <i class="icon-user"></i>
+        </div>
+        <div class="login-field">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <i class="icon-lock"></i>
+        </div>
+        <div class="login-button clearfix">
+            <label class="checkbox pull-left">
+                <div class="checker"><span><input type="checkbox" class="uniform" name="checkbox1"></span>
+                </div>
+                Remember me
+            </label>
+            <button type="submit" class="pull-right btn btn-large blue">SIGN IN</button>
+        </div>
+        <div class="forgot-password">
+            <a href="http://localhost/whoAmI/forget#forgot-pw" role="button"
+               data-toggle="modal">Forgot password?</a>
+        </div>
+    </form>
+</div>
+
+<div id="forgot-pw" class="modal hide fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                class="icon-remove"></i></button>
+        <h3>Forgot your password?</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="form_row">
+                    <label class="field_name">Email address</label>
+
+                    <div class="field">
+                        <div class="row-fluid">
+                            <div class="span8">
+                                <input type="text" class="span12" name="email"
+                                       placeholder="example@domain.com">
+                            </div>
+                            <div class="span4">
+                                <a href="http://localhost/whoAmI/reset#"
+                                   class="btn btn-block blue">Reset password</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-lg" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-                        <span class="pull-right"><a href="#">Register</a></span><span><a href="#">Need
-                        help?</a></span>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <div class="col-md-12">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- script references -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script src="ui/js/bootstrap.min.js"></script>
-<script src="ui/js/scripts.js"></script>
+
 </body>
 </html>
