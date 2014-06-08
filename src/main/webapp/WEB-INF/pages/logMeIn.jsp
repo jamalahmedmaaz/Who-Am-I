@@ -2,11 +2,12 @@
         <html>
         <title>Login</title>
         <head>
+        <link href="<c:url value="/resources/img/background.jpg" />" rel="shortcut icon">
         <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/css/stylesheet.css" />" rel="stylesheet">
         <style>
         body {
-        background: url("<c:url value="/resources/img/background.jpg" />") no-repeat center center
+        background: url("<c:url value="/resources/img/background3.jpg" />") no-repeat center center
         fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
