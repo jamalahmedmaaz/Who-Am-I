@@ -21,14 +21,7 @@
         .bs-example{
         margin: 20px;
         }
-        body {
-        background: url("<c:url value="/resources/img/background3.jpg" />") no-repeat center center
-        fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        }
+
         </style>
         </head>
         <body>
