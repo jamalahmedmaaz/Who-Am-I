@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * Created by cassandra on 6/9/14.
  */
 @Repository
-public class UserInfoDaoImpl extends AbstractCassandraDaoImpl<UserInfo, Integer> {
+public class UserInfoDaoImpl extends AbstractCassandraDaoImpl<UserInfo, Integer> implements UserInfoDao {
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(UserInfoDaoImpl.class);
 
     @Override

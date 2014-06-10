@@ -7,7 +7,7 @@
         <link href="<c:url value="/resources/css/stylesheet.css" />" rel="stylesheet">
         <style>
         body {
-        background: url("<c:url value="/resources/img/background3.jpg" />") no-repeat center center
+        background: url("<c:url value="/resources/img/background2.jpg" />") no-repeat center center
         fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;

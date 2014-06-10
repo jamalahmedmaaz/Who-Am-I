@@ -81,23 +81,24 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
             SessionCallback<T> sessionCallback = new SessionCallback() {
                 @Override
                 public Object doInSession(Session session) throws DataAccessException {
-                    StringBuffer query = new StringBuffer("SELECT * FROM " + getEntityType())
+                    StringBuffer query = new StringBuffer("SELECT * FROM " + getEntityType().getSimpleName())
                             .append(" ").append("WHERE ");
                     int counter = 0;
                     for (Map.Entry<String, ? extends Serializable> entry : keyValuePairs.entrySet()) {
                         if (counter > 0) {
                             query.append(" AND ");
                         }
-                        query.append(entry.getKey()).append(" = ").append(entry.getValue());
+                        query.append(entry.getKey()).append(" = ").append("'" + entry.getValue() + "'");
                         counter++;
                     }
                     RegularStatement statement = (RegularStatement) new SimpleStatement(query.toString()).setConsistencyLevel(ConsistencyLevel.ALL);
-                    return session.execute(statement);
+
+                    return session.execute(statement).all();
                 }
             };
             return (List<T>) cassandraTemplate.execute(sessionCallback);
         } catch (DataAccessException e) {
-            getLogger().error("findByExample failed: " + e);
+            getLogger().error("findByProperties failed: " + e);
             throw e;
         }
     }
