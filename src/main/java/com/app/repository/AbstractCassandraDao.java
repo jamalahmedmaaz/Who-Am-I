@@ -1,6 +1,9 @@
 package com.app.repository;
 
+import com.datastax.driver.core.querybuilder.Clause;
+
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +16,11 @@ public interface AbstractCassandraDao<T, ID extends Serializable> {
 
     public abstract List<T> findAll();
 
+    public abstract T findOne(final Collection<Clause> criteria);
+
     public abstract T findByExternalId(final String externalId);
 
-//    public abstract List<T> findByCriteria(final Criterion... criteria);
+    public List<T> findByCriteria(final Collection<Clause> criteria);
 
     public abstract List<T> findByExample(T exampleInstance);
 

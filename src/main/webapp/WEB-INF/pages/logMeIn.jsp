@@ -5,6 +5,47 @@
         <link href="<c:url value="/resources/img/Tab.jpg" />" rel="shortcut icon">
         <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet">
         <link href="<c:url value="/resources/css/stylesheet.css" />" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function () {
+
+        $("form").submit(function (e) {
+        /* put your form field(s) you want to validate here, this checks if your input field of
+        choice is blank */
+        if(!$('#username').val()){
+        console.log("-------");
+        e.preventDefault(); // This will prevent the form submission
+        } else{
+        // In the event all validations pass. THEN process AJAX request.
+        $.ajax({
+        url: '@Url.Action("HasJobInProgress", "ClientChoices")/',
+        data: { id: '@Model.ClientId' },
+        success: function (data) {
+        showMsg(data, e);
+        },
+        cache: false
+        });
+        }
+        });
+
+        $("#username").blur(function(){
+        var userObject = {};
+        userObject.userName = $('#username').val();
+        console.log(userObject);
+        $.ajax({
+        url: 'http://localhost:3333/api/user/findUser',
+        type:'POST',
+        data :JSON.stringify(userObject),
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8"
+        }).done(function(response){
+        console.log("---dasdf----");
+        $("#my_div").html(response);
+        })
+        });
+        });
+
+        </script>
         <style>
         body {
         background: url("<c:url value="/resources/img/background2.jpg" />") no-repeat center center

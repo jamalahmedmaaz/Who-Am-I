@@ -14,4 +14,5 @@ public class UserInfoDaoImpl extends AbstractCassandraDaoImpl<UserInfo, Integer>
     protected org.apache.log4j.Logger getLogger() {
         return logger;
     }
+
 }

@@ -1,20 +1,25 @@
 package com.app.repository;
 
 import com.app.model.AbstractEntity;
-import com.datastax.driver.core.ConsistencyLevel;
-import com.datastax.driver.core.RegularStatement;
-import com.datastax.driver.core.Session;
-import com.datastax.driver.core.SimpleStatement;
+import com.datastax.driver.core.*;
+import com.datastax.driver.core.exceptions.DriverException;
+import com.datastax.driver.core.querybuilder.Clause;
+import com.datastax.driver.core.querybuilder.Ordering;
+import com.datastax.driver.core.querybuilder.QueryBuilder;
+import com.datastax.driver.core.querybuilder.Select;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.springframework.cassandra.core.RowMapper;
 import org.springframework.cassandra.core.SessionCallback;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.springframework.util.ReflectionUtils;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by cassandra on 6/9/14.
@@ -56,6 +61,16 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
     }
 
     @Override
+    public T findOne(Collection<Clause> criteria) {
+        List<T> entities = findByCriteria(null, 1, criteria.toArray(new Clause[]{}));
+        if (entities != null && entities.size() > 0) {
+            return entities.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<T> findAll() {
         return null;
     }
@@ -74,6 +89,79 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
     public List<T> findByExample(T exampleInstance, String... excludeProperty) {
         return null;
     }
+
+    @Override
+    public List<T> findByCriteria(final Collection<Clause> criteria) {
+        Ordering[] orders = {};
+        return findByCriteria(orders, criteria);
+    }
+
+    public List<T> findByCriteria(final Ordering[] orders, final Collection<Clause> criteria) {
+        return findByCriteria(orders, criteria.toArray(new Clause[]{}));
+    }
+
+    public List<T> findByCriteria(final Ordering[] orders, final Clause... criteria) {
+        return findByCriteria(orders, null, criteria);
+    }
+
+    public List<T> findByCriteria(final Ordering[] orders, final Integer maxResults,
+                                  final Clause... criteria) {
+        return findByCriteria(orders, maxResults, null, criteria);
+    }
+
+    public List<T> findByCriteria(final Ordering[] orders, final Integer maxResults,
+                                  Object cacheMode, final Clause... criteria) {
+        return findByCriteria(orders, null, maxResults, cacheMode, new ArrayList<AliasContainer>(),
+                false, criteria);
+    }
+
+    public List<T> findByCriteria(final Ordering[] orders, final Integer firstResult,
+                                  final Integer maxResults, Object cacheMode,
+                                  final List<AliasContainer> aliases,
+                                  boolean dontGetFromJQueryCache, final Clause... criteria) {
+        Select selectQuery = QueryBuilder.select().from(getEntityType().getSimpleName());
+
+        for (Clause criterion : criteria) {
+            selectQuery.where().and(criterion);
+        }
+        if (orders != null) {
+            for (Ordering order : orders) {
+                selectQuery.orderBy(order);
+            }
+        }
+        /*if (maxResults != null) {
+            selectQuery.limit(maxResults);
+        }*/
+        List<T> list = Lists.newArrayList();
+        try {
+            list = cassandraTemplate.query(selectQuery, new RowMapper<T>() {
+                @Override
+                public T mapRow(Row row, int rowNum) throws DriverException {
+                    try {
+                        Class c = getEntityType();
+                        T t = (T) c.newInstance();
+                        List<Field> fields = getAllFields(new LinkedList<Field>(), c);
+                        for (Field field : fields) {
+                            ReflectionUtils.makeAccessible(field);
+                            ReflectionUtils.setField(field, t, row.getString(field.getName()));
+                        }
+                        return t;
+                    } catch (InstantiationException e) {
+                        throw new RuntimeException();
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException();
+                    }
+                }
+            });
+            return list;
+        } catch (DataAccessException e) {
+            getLogger().error("findByCriteria failed: " + e);
+            throw e;
+        } finally {
+            //do halla gulla
+        }
+    }
+
 
     @Override
     public List<T> findByProperties(final Map<String, ? extends Serializable> keyValuePairs) {
@@ -132,4 +220,17 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
     public void clear() {
 
     }
+
+    public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+        for (Field field : type.getDeclaredFields()) {
+            fields.add(field);
+        }
+
+        if (type.getSuperclass() != null) {
+            fields = getAllFields(fields, type.getSuperclass());
+        }
+        return fields;
+    }
+
 }
+

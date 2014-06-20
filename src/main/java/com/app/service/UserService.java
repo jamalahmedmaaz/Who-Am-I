@@ -7,4 +7,6 @@ import com.app.model.UserInfo;
  */
 public interface UserService {
     public void login(UserInfo userInfo);
+
+    public Object findUser(UserInfo userInfo);
 }
