@@ -27,8 +27,8 @@ public class LoginApi {
 
     @POST
     @Path("/findUser")
-    public void login(UserInfo userInfo) {
+    public Object login(UserInfo userInfo) {
         LOG.debug("login called with " + userInfo);
-        userService.findUser(userInfo);
+        return userService.findUser(userInfo);
     }
 }

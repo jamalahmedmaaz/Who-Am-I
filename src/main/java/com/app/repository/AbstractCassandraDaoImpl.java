@@ -138,14 +138,7 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
                 @Override
                 public T mapRow(Row row, int rowNum) throws DriverException {
                     try {
-                        Class c = getEntityType();
-                        T t = (T) c.newInstance();
-                        List<Field> fields = getAllFields(new LinkedList<Field>(), c);
-                        for (Field field : fields) {
-                            ReflectionUtils.makeAccessible(field);
-                            ReflectionUtils.setField(field, t, row.getString(field.getName()));
-                        }
-                        return t;
+                        return createEntityFromRows(row);
                     } catch (InstantiationException e) {
                         throw new RuntimeException();
                     } catch (IllegalAccessException e) {
@@ -160,6 +153,24 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
         } finally {
             //do halla gulla
         }
+    }
+
+    private T createEntityFromRows(Row row) throws IllegalAccessException, InstantiationException {
+        Class c = getEntityType();
+        T t = (T) c.newInstance();
+        List<Field> fields = getAllFields(new LinkedList<Field>(), c);
+        for (Field field : fields) {
+            ReflectionUtils.makeAccessible(field);
+            String typeName = field.getType().getSimpleName();
+            //System.out.println(typeName);
+            if (typeName.equals("String")) {
+                ReflectionUtils.setField(field, t, row.getString(field.getName()));
+            }
+            if (typeName.equals("long")) {
+                ReflectionUtils.setField(field, t, row.getLong(field.getName()));
+            }
+        }
+        return t;
     }
 
 

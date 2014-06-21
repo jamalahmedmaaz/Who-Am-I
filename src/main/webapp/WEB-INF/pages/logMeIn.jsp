@@ -39,7 +39,7 @@
         dataType: 'json',
         contentType: "application/json; charset=utf-8"
         }).done(function(response){
-        console.log("---dasdf----");
+        console.log("response "+response.id);
         $("#my_div").html(response);
         })
         });

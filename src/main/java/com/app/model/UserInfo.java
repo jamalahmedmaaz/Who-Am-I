@@ -16,13 +16,6 @@ public class UserInfo extends AbstractEntity {
     public UserInfo() {
     }
 
-    public UserInfo(int id, String userName, String email, String password) {
-        this.id = id;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-    }
-
     public String getUserName() {
 
         return userName;
