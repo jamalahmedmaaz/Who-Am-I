@@ -18,6 +18,7 @@ import org.springframework.util.ReflectionUtils;
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
@@ -163,47 +164,28 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
             ReflectionUtils.makeAccessible(field);
             String typeName = field.getType().getSimpleName();
             //System.out.println(typeName);
-            if (typeName.equals("String")) {
+            if (typeName.equalsIgnoreCase("String")) {
                 ReflectionUtils.setField(field, t, row.getString(field.getName()));
             }
-            if (typeName.equals("long")) {
+            if (typeName.equalsIgnoreCase("long")) {
                 ReflectionUtils.setField(field, t, row.getLong(field.getName()));
+            }
+            if (typeName.equalsIgnoreCase("ByteBuffer")) {
+                ReflectionUtils.setField(field, t, row.getBytes(field.getName()));
             }
         }
         return t;
     }
 
-
     @Override
-    public List<T> findByProperties(final Map<String, ? extends Serializable> keyValuePairs) {
-        try {
-            SessionCallback<T> sessionCallback = new SessionCallback() {
-                @Override
-                public Object doInSession(Session session) throws DataAccessException {
-                    StringBuffer query = new StringBuffer("SELECT * FROM " + getEntityType().getSimpleName())
-                            .append(" ").append("WHERE ");
-                    int counter = 0;
-                    for (Map.Entry<String, ? extends Serializable> entry : keyValuePairs.entrySet()) {
-                        if (counter > 0) {
-                            query.append(" AND ");
-                        }
-                        query.append(entry.getKey()).append(" = ").append("'" + entry.getValue() + "'");
-                        counter++;
-                    }
-                    RegularStatement statement = (RegularStatement) new SimpleStatement(query.toString()).setConsistencyLevel(ConsistencyLevel.ALL);
+    public T insertOrUpdate(T instance) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        /*Map<String, String> map = BeanUtils.describe(instance);
+        Insert insert = QueryBuilder.insertInto(getEntityType().getSimpleName());
 
-                    return session.execute(statement).all();
-                }
-            };
-            return (List<T>) cassandraTemplate.execute(sessionCallback);
-        } catch (DataAccessException e) {
-            getLogger().error("findByProperties failed: " + e);
-            throw e;
-        }
-    }
-
-    @Override
-    public T insertOrUpdate(T instance) {
+        for (Map.Entry<String, String> entity : map.entrySet()) {
+            insert.value(entity.getKey(), entity.getValue())
+        }*/
+        cassandraTemplate.insert(instance);
         return null;
     }
 
@@ -243,5 +225,33 @@ public abstract class AbstractCassandraDaoImpl<T extends AbstractEntity, ID exte
         return fields;
     }
 
+
+    @Override
+    public List<T> findByProperties(final Map<String, ? extends Serializable> keyValuePairs) {
+        try {
+            SessionCallback<T> sessionCallback = new SessionCallback() {
+                @Override
+                public Object doInSession(Session session) throws DataAccessException {
+                    StringBuffer query = new StringBuffer("SELECT * FROM " + getEntityType().getSimpleName())
+                            .append(" ").append("WHERE ");
+                    int counter = 0;
+                    for (Map.Entry<String, ? extends Serializable> entry : keyValuePairs.entrySet()) {
+                        if (counter > 0) {
+                            query.append(" AND ");
+                        }
+                        query.append(entry.getKey()).append(" = ").append("'" + entry.getValue() + "'");
+                        counter++;
+                    }
+                    RegularStatement statement = (RegularStatement) new SimpleStatement(query.toString()).setConsistencyLevel(ConsistencyLevel.ALL);
+
+                    return session.execute(statement).all();
+                }
+            };
+            return (List<T>) cassandraTemplate.execute(sessionCallback);
+        } catch (DataAccessException e) {
+            getLogger().error("findByProperties failed: " + e);
+            throw e;
+        }
+    }
 }
 

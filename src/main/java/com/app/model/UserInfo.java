@@ -2,6 +2,8 @@ package com.app.model;
 
 import org.springframework.data.cassandra.mapping.Table;
 
+import java.nio.ByteBuffer;
+
 /**
  * Created by cassandra on 6/5/14.
  */
@@ -12,6 +14,7 @@ public class UserInfo extends AbstractEntity {
     private String userName;
     private String email;
     private String password;
+    private ByteBuffer image;
 
     public UserInfo() {
     }
@@ -41,13 +44,21 @@ public class UserInfo extends AbstractEntity {
         this.password = password;
     }
 
+    public ByteBuffer getImage() {
+        return image;
+    }
+
+    public void setImage(ByteBuffer image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
+                "userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", image=" + image +
                 '}';
     }
 }

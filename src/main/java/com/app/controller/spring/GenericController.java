@@ -27,7 +27,6 @@ public class GenericController {
     @RequestMapping("/register")
     public String register(Model model) {
         LOG.debug("login request ");
-        return "userDetail";
+        return "CustomerForm";
     }
-
 }

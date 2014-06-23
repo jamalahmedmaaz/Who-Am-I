@@ -9,6 +9,21 @@
 
     <mvc:annotation-driven/>
 
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+
+    <bean class="com.app.controller.spring.CustomerController">
+        <property name="formView" value="CustomerForm"/>
+        <property name="successView" value="CustomerSuccess"/>
+    </bean>
+
+    <!-- Register the Customer.properties -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="com/mkyong/customer/properties/Customer"/>
+    </bean>
+
+
     <!-- View Resolver for JSPs -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

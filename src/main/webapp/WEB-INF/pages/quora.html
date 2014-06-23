@@ -1,0 +1,1156 @@
+<html>
+<head>
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+<script src="http://assets.insnw.net/instart/js/instart-quora.js"
+        type="text/javascript"></script>
+<script src="//assets.insnw.net/instart/js/0/init?cb=INSTART.Init"></script>
+<script src="//assets.insnw.net/instart/js/week-121-0/monitor/instart.js"></script>
+<script>window['__inline_init_cb']();</script>
+<script>
+    this.require || function (global, undefined) {
+        function require(a) {
+            if (!exported[a]) {
+                rec("loader.require", "Required", a);
+                var b, c = installed[a];
+                c && (c.id = a, c.exports = b = {}, c(function (b) {
+                    return demand(b, a)
+                }, exported[a] = b, c), c.exports && c.exports !== b && (exported[a] = c.exports), rec("loader.require.export" + (c.lazy ? ".lazy" : ""), "Exported", a))
+            }
+            return used[a] = !0, exported[a]
+        }
+
+        function demand(a, b) {
+            return require(a = absolutize(a, b)) || raise(a)
+        }
+
+        function raise(a) {
+            throw a
+        }
+
+        function absolutize(a, b) {
+            if (b && /^\./.test(a)) {
+                a = "/" + b + "/../" + a;
+                while (a != (b = a.replace(rel_path_exp, "/")))a = b
+            }
+            return a.replace(/^\//, "")
+        }
+
+        function deps(a) {
+            if (!a.unmet) {
+                var b = a + "", c, d = a.unmet = {};
+                require_exp.lastIndex = 0;
+                while (c = require_exp.exec(b))d[c[1]] = 1
+            }
+            return a.unmet
+        }
+
+        function ready(a) {
+            if (typeof a == "object")return!0;
+            var b, c = {}, d = deps(a), e;
+            for (e in d)exported[e] || installed[e] ? c[e] = 1 : b = 1;
+            for (e in c)delete d[e];
+            if (b) {
+                log("missing modules:");
+                for (e in d)log(e)
+            }
+            return!b
+        }
+
+        function log() {
+            try {
+                var a = global.console;
+                a && a.log.apply(a, arguments)
+            } catch (b) {
+            }
+        }
+
+        function flushQueue() {
+            if (!flushing)try {
+                while (qhead !== qtail && ready(qhead.next))flushing = qhead, qhead = qhead.next, delete flushing.next, rec("loader.flushQueue", "Start"), qhead(demand), rec("loader.flushQueue", "Finish")
+            } finally {
+                flushing = 0
+            }
+        }
+
+        function rec() {
+            var a = global;
+            return a.log && a.log.enabled && a.log.apply(a.log, arguments), history[history.length] = {time: +(new Date), tags: history.slice.call(arguments)}
+        }
+
+        var history = [], installed = {}, exported = {}, used = {}, qhead = {}, qtail = qhead, flushing, require_exp = /require\(['"]([^'"]+)['"]\)/g, rel_path_exp = /\/(\.?|[^\/]+\/\.\.)\//;
+        require.install = function (a, b) {
+            rec("loader.install" + (b.lazy ? ".lazy" : ""), "Installing", a);
+            var c = typeof b == "object" ? exported : installed;
+            c[a] || (c[a] = b, flushQueue())
+        }, require.installLazy = function (id, code) {
+            var module = function (require, exports, module) {
+                window._evalCallArgs = arguments, eval("(function(require,exports,module){" + code + "//*/\n}).apply(window, window._evalCallArgs)")
+            };
+            module.lazy = !0, require.install(id, module)
+        }, require.enqueue = function (a) {
+            qtail = qtail.next = a, qhead.next === qtail && ready(a) && flushQueue()
+        }, require.stats = function () {
+            var a = {}, b = "", c = "", d = {}, e = [], f;
+            for (var g in installed) {
+                var h = installed[g] + "";
+                g in used ? b += h : (a[g] = !0, c += h), d[g] = h.length
+            }
+            f = b.length + c.length;
+            for (var g in installed)g.startsWith("internal") || e.push([g, 100 * d[g] / f]);
+            return console.log("Used modules:", Object.keys(used).length, "Unused modules:", Object.keys(a).length), console.log("Used JS size:", b.length, "Unused JS size:", c.length, 100 * b.length / f), console.table(e), {used: Object.keys(used), unused: Object.keys(a), installed: installed, exported: exported, usedJS: b, unusedJS: c, percents: e, sizes: d}
+        }, rec.dump = function () {
+            return history.slice()
+        }, global.rec = rec, global.require = require, rec("loader", "Ready")
+    }(this);
+    ;
+    require.install("settings", {
+        revision: "ab0598ac8c70614b99b3951ce916ccf0375f00fe",
+        installTime: rec("settings", "install").time,
+        instance: "main",
+        formkey: "541e60a826f0772279e66d8b04a9352a",
+        postkey: "2848d7f03a9ad22d2b333840bff4dbaf",
+        uid: null,
+        controller: "index",
+        action: "index",
+        codebaseType: "production",
+        cookiePrefix: "m",
+        trail: null,
+        actionTrail: null,
+        mobile: false,
+        serverCallUrl: "/webnode2/server_call_POST?__instart__",
+        paraServerCallUrl: "/webnode2/server_call_parallel_POST?__instart__",
+        scribeSampleRate: 1.000000,
+        pageMode: "live" || "live",
+        feedAnchoring: false,
+        requireBase: "http://qsc.is.quoracdn.net/-095ad50637f7c3aa/",
+        debug: false,
+        componentDebug: false,
+        appURL: null,
+        fbAppId: "136609459636",
+        googleClientId: "917071888555.apps.googleusercontent.com",
+        googleCookiePolicy: "http://quora.com",
+        mobileRedirect: false,
+        enableFrameBusting: true,
+        keyboardShortcuts: false,
+        isParallel: true,
+        client_side_js_load_delays_enabled: true,
+        client_side_logging: false,
+        client_side_server_call_error_notifications: true,
+        client_side_server_call_error_logging_percentage: 0,
+        subdomain_name: null,
+        subdomain_suffix: "quora.com",
+        default_uri_subdomain_name: null,
+        force_use_absolute_links: false,
+        qtext_improvement_spacing: false,
+        qtext_improvement_list: false,
+        new_grid: false,
+        e2e_sample_rate: 0.100000
+    });
+</script>
+<link rel="search" type="application/opensearchdescription+xml"
+      href="/opensearch/description.xml" title="Quora">
+<meta name="robots" content="noarchive">
+<script type="text/javascript">
+    window.lazyJQuery = true;
+    if (window.log && log.enabled)
+        log('page', 'Loading JS modules...');
+</script>
+<link href="http://qsc.is.quoracdn.net/-b6443b167597269b.css" rel="stylesheet" type="text/css">
+<link href="http://qsc.is.quoracdn.net/-7a63cdcdfe4b5c57.css" rel="stylesheet" type="text/css">
+<link href="http://qsc.is.quoracdn.net/-92e871dcfcacaf27.css" rel="stylesheet" type="text/css">
+<link href="http://qsc.is.quoracdn.net/-bcc4833ef1348777.css" rel="stylesheet" type="text/css">
+<script>var __W2__shouldUseNewContentForLoadingSpinner = false;</script>
+<script type="text/javascript" src="http://qsc.is.quoracdn.net/-b841a239393ee84a.js"></script>
+<script type="text/javascript" src="http://qsc.is.quoracdn.net/-6e1a195f9eebbb48.js"></script>
+<script type="text/javascript" src="http://qsc.is.quoracdn.net/-b42bba0a5b4ea5cb.js"></script>
+<script type="text/javascript" src="http://qsc.is.quoracdn.net/-095ad50637f7c3aa.js"></script>
+<style type="text/css"></style>
+<script type="text/javascript">
+    if (window.log && log.enabled)
+        log('page', 'Done. Header chunk is processed.');
+</script>
+<title>Quora - Your Best Source for Knowledge</title>
+<link rel="canonical" href="http://www.quora.com/">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0"
+      href="http://www.quora.com/rss">
+<script type="text/javascript">
+    if (window.w2_timing)
+        w2_timing.logTime('bodyChunkStart');
+</script>
+<style type="text/css">.fb_hidden {
+    position: absolute;
+    top: -10000px;
+    z-index: 10001
+}
+
+.fb_invisible {
+    display: none
+}
+
+.fb_reset {
+    nnnbackground: none;
+    border: 0;
+    border-spacing: 0;
+    color: #000;
+    cursor: auto;
+    direction: ltr;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    visibility: visible;
+    white-space: normal;
+    word-spacing: normal
+}
+
+.fb_reset > div {
+    overflow: hidden
+}
+
+.fb_link img {
+    border: none
+}
+
+.fb_dialog {
+    background: rgba(82, 82, 82, .7);
+    position: absolute;
+    top: -10000px;
+    z-index: 10001
+}
+
+.fb_reset .fb_dialog_legacy {
+    overflow: visible
+}
+
+.fb_dialog_advanced {
+    padding: 10px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px
+}
+
+.fb_dialog_content {
+    background: #fff;
+    color: #333
+}
+
+.fb_dialog_close_icon {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+    _background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);
+    cursor: pointer;
+    display: block;
+    height: 15px;
+    position: absolute;
+    right: 18px;
+    top: 17px;
+    width: 15px
+}
+
+.fb_dialog_mobile .fb_dialog_close_icon {
+    top: 5px;
+    left: 5px;
+    right: auto
+}
+
+.fb_dialog_padding {
+    background-color: transparent;
+    position: absolute;
+    width: 1px;
+    z-index: -1
+}
+
+.fb_dialog_close_icon:hover {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;
+    _background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)
+}
+
+.fb_dialog_close_icon:active {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;
+    _background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)
+}
+
+.fb_dialog_loader {
+    background-color: #f2f2f2;
+    border: 1px solid #606060;
+    font-size: 24px;
+    padding: 20px
+}
+
+.fb_dialog_top_left, .fb_dialog_top_right, .fb_dialog_bottom_left, .fb_dialog_bottom_right {
+    height: 10px;
+    width: 10px;
+    overflow: hidden;
+    position: absolute
+}
+
+.fb_dialog_top_left {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;
+    left: -10px;
+    top: -10px
+}
+
+.fb_dialog_top_right {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;
+    right: -10px;
+    top: -10px
+}
+
+.fb_dialog_bottom_left {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;
+    bottom: -10px;
+    left: -10px
+}
+
+.fb_dialog_bottom_right {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;
+    right: -10px;
+    bottom: -10px
+}
+
+.fb_dialog_vert_left, .fb_dialog_vert_right, .fb_dialog_horiz_top, .fb_dialog_horiz_bottom {
+    position: absolute;
+    background: #525252;
+    filter: alpha(opacity=70);
+    opacity: .7
+}
+
+.fb_dialog_vert_left, .fb_dialog_vert_right {
+    width: 10px;
+    height: 100%
+}
+
+.fb_dialog_vert_left {
+    margin-left: -10px
+}
+
+.fb_dialog_vert_right {
+    right: 0;
+    margin-right: -10px
+}
+
+.fb_dialog_horiz_top, .fb_dialog_horiz_bottom {
+    width: 100%;
+    height: 10px
+}
+
+.fb_dialog_horiz_top {
+    margin-top: -10px
+}
+
+.fb_dialog_horiz_bottom {
+    bottom: 0;
+    margin-bottom: -10px
+}
+
+.fb_dialog_iframe {
+    line-height: 0
+}
+
+.fb_dialog_content .dialog_title {
+    background: #6d84b4;
+    border: 1px solid #3b5998;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0
+}
+
+.fb_dialog_content .dialog_title > span {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+    float: left;
+    padding: 5px 0 7px 26px
+}
+
+body.fb_hidden {
+    -webkit-transform: none;
+    height: 100%;
+    margin: 0;
+    overflow: visible;
+    position: absolute;
+    top: -10000px;
+    left: 0;
+    width: 100%
+}
+
+.fb_dialog.fb_dialog_mobile.loading {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 10001
+}
+
+.fb_dialog.fb_dialog_mobile.loading.centered {
+    max-height: 590px;
+    min-height: 590px;
+    max-width: 500px;
+    min-width: 500px
+}
+
+#fb-root #fb_dialog_ipad_overlay {
+    background: rgba(0, 0, 0, .45);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 10000
+}
+
+#fb-root #fb_dialog_ipad_overlay.hidden {
+    display: none
+}
+
+.fb_dialog.fb_dialog_mobile.loading iframe {
+    visibility: hidden
+}
+
+.fb_dialog_content .dialog_header {
+    -webkit-box-shadow: white 0 1px 1px -1px inset;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));
+    border-bottom: 1px solid;
+    border-color: #1d4088;
+    color: #fff;
+    font: 14px Helvetica, sans-serif;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0;
+    vertical-align: middle;
+    white-space: nowrap
+}
+
+.fb_dialog_content .dialog_header table {
+    -webkit-font-smoothing: subpixel-antialiased;
+    height: 43px;
+    width: 100%
+}
+
+.fb_dialog_content .dialog_header td.header_left {
+    font-size: 12px;
+    padding-left: 5px;
+    vertical-align: middle;
+    width: 60px
+}
+
+.fb_dialog_content .dialog_header td.header_right {
+    font-size: 12px;
+    padding-right: 5px;
+    vertical-align: middle;
+    width: 60px
+}
+
+.fb_dialog_content .touchable_button {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));
+    border: 1px solid #29447e;
+    -webkit-background-clip: padding-box;
+    -webkit-border-radius: 3px;
+    -webkit-box-shadow: rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;
+    display: inline-block;
+    margin-top: 3px;
+    max-width: 85px;
+    line-height: 18px;
+    padding: 4px 12px;
+    position: relative
+}
+
+.fb_dialog_content .dialog_header .touchable_button input {
+    border: none;
+    background: none;
+    color: #fff;
+    font: 12px Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 2px -12px;
+    padding: 2px 6px 3px 6px;
+    text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+}
+
+.fb_dialog_content .dialog_header .header_center {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle
+}
+
+.fb_dialog_content .dialog_content {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+    border: 1px solid #555;
+    border-bottom: 0;
+    border-top: 0;
+    height: 150px
+}
+
+.fb_dialog_content .dialog_footer {
+    background: #f2f2f2;
+    border: 1px solid #555;
+    border-top-color: #ccc;
+    height: 40px
+}
+
+#fb_dialog_loader_close {
+    float: left
+}
+
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button {
+    text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+}
+
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+    visibility: hidden
+}
+
+.fb_iframe_widget {
+    display: inline-block;
+    position: relative
+}
+
+.fb_iframe_widget span {
+    display: inline-block;
+    position: relative;
+    text-align: justify
+}
+
+.fb_iframe_widget iframe {
+    position: absolute
+}
+
+.fb_iframe_widget_lift {
+    z-index: 1
+}
+
+.fb_hide_iframes iframe {
+    position: relative;
+    left: -10000px
+}
+
+.fb_iframe_widget_loader {
+    position: relative;
+    display: inline-block
+}
+
+.fb_iframe_widget_fluid {
+    display: inline
+}
+
+.fb_iframe_widget_fluid span {
+    width: 100%
+}
+
+.fb_iframe_widget_loader iframe {
+    min-height: 32px;
+    z-index: 2;
+    zoom: 1
+}
+
+.fb_iframe_widget_loader .FB_Loader {
+    background: url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    position: absolute;
+    left: 50%;
+    z-index: 4
+}
+
+.fb_connect_bar_container div, .fb_connect_bar_container span, .fb_connect_bar_container a, .fb_connect_bar_container img, .fb_connect_bar_container strong {
+    background: none;
+    border-spacing: 0;
+    border: 0;
+    direction: ltr;
+    font-style: normal;
+    font-variant: normal;
+    letter-spacing: normal;
+    line-height: 1;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    visibility: visible;
+    white-space: normal;
+    word-spacing: normal;
+    vertical-align: baseline
+}
+
+.fb_connect_bar_container {
+    position: fixed;
+    left: 0 !important;
+    right: 0 !important;
+    height: 42px !important;
+    padding: 0 25px !important;
+    margin: 0 !important;
+    vertical-align: middle !important;
+    border-bottom: 1px solid #333 !important;
+    background: #3b5998 !important;
+    z-index: 99999999 !important;
+    overflow: hidden !important
+}
+
+.fb_connect_bar_container_ie6 {
+    position: absolute;
+    top: expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")
+}
+
+.fb_connect_bar {
+    position: relative;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    padding: 6px 0 0 0 !important;
+    background: none;
+    color: #fff !important;
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif !important;
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    letter-spacing: normal !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    text-indent: 0 !important;
+    text-shadow: none !important;
+    text-transform: none !important;
+    white-space: normal !important;
+    word-spacing: normal !important
+}
+
+.fb_connect_bar a:hover {
+    color: #fff
+}
+
+.fb_connect_bar .fb_profile img {
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    margin: 0 6px 5px 0
+}
+
+.fb_connect_bar div a, .fb_connect_bar span, .fb_connect_bar span a {
+    color: #bac6da;
+    font-size: 11px;
+    text-decoration: none
+}
+
+.fb_connect_bar .fb_buttons {
+    float: right;
+    margin-top: 7px
+}
+
+.fbpluginrecommendationsbarleft, .fbpluginrecommendationsbarright {
+    position: fixed !important;
+    bottom: 0;
+    z-index: 999
+}
+
+.fbpluginrecommendationsbarleft {
+    left: 10px
+}
+
+.fbpluginrecommendationsbarright {
+    right: 10px
+}</style>
+</head>
+<body class="logged_out_page_big_signup" data-twttr-rendered="true">
+<script charset="utf-8"
+        src="http://tch922312.tch.quora.com/up/chan3-8881/updates?min_seq=156388635&amp;channel=main-w-dep170-562876666545979231&amp;callback=jsonp146bea506a8c023fbf4"></script>
+<div class="hidden interaction_mode_banner" id="__w2_WfuEAVl_banner">
+    <div class="above_page_padding"></div>
+    <div class="above_page_banner" id="__w2_WfuEAVl_message">There are some updates to this page
+        that haven't been applied yet because you've entered some data into a form. You can <a
+                href="#" id="__w2_WfuEAVl_resume">refresh this page</a> to receive new updates.
+    </div>
+</div>
+<div class="__connection_warning hidden" id="__w2_g4kno2O_warning">Trying to regain internet
+    connection...
+</div>
+<div class="hidden error_mode_banner" id="__w2_hoCxRMw_banner">
+    <div class="above_page_padding"></div>
+    <div class="above_page_banner" id="__w2_hoCxRMw_message"><span id="__w2_hoCxRMw_text"></span> <a
+            href="#" id="__w2_hoCxRMw_hide">Hide this message</a>.
+    </div>
+</div>
+<div id="ld_jobmqg_212">
+<div class="pmsg_container hidden main wrapper" id="__w2_yrLsvoY_pmsg_container"></div>
+<div class="main wrapper">
+<div class="main_full_width content contents main_content">
+<div id="__w2_mV1npAe_content">
+<div id="ld_efajki_231852">
+<div class="row big_signup_wrapper">
+<div class="e_col w4 quora_explanation" id="__w2_FJSWGlL_quora_explanation">
+    <div class="row logo_and_login_row">
+        <div class="logo_big w1_5 col"><a href="/">Quora</a></div>
+    </div>
+    <div class="row">
+        <div class="new_positioning"><h1>Sign up to read Quora.</h1>
+
+            <h2>Quora is your best source for knowledge.</h2></div>
+        <div class="fb_signup_facepile_container">
+            <div id="__w2_SpQHS13_fb_facepile">
+                <div data-width="400" data-size="small" data-max-rows="1"
+                     class="fb-facepile fb_iframe_widget"
+                     data-colorscheme="dark" fb-xfbml-state="rendered"
+                     fb-iframe-plugin-query="app_id=136609459636&amp;color_scheme=dark&amp;locale=en_US&amp;max_rows=1&amp;sdk=joey&amp;size=small&amp;width=400">
+                                            <span style="vertical-align: bottom; width: 0px; height: 0px;"><iframe
+                                                    name="f1afb70444" width="400px" height="1000px"
+                                                    frameborder="0" allowtransparency="true"
+                                                    scrolling="no"
+                                                    title="fb:facepile Facebook Social Plugin"
+                                                    src="http://www.facebook.com/plugins/facepile.php?app_id=136609459636&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FDhmkJ2TR0QN.js%3Fversion%3D41%23cb%3Dff5fa1858%26domain%3Dwww.quora.com%26origin%3Dhttp%253A%252F%252Fwww.quora.com%252Ff226e62ba4%26relation%3Dparent.parent&amp;color_scheme=dark&amp;locale=en_US&amp;max_rows=1&amp;sdk=joey&amp;size=small&amp;width=400"
+                                                    style="border: none; visibility: visible; width: 0px; height: 0px;"
+                                                    class=""></iframe></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="side_col e_col w3_5">
+<div class="row logo_and_login_row">
+    <div id="ld_pvnwpv_229636">
+        <div class="logged_out_home_header_login row top_10"
+             id="__w2_LFLFV8F_logged_out_header_login">
+            <div id="__w2_LFLFV8F_associated">
+                <div class="w2_5 e_col">
+                    <div id="ld_czwqca_178612"></div>
+                </div>
+            </div>
+            <div class="row">
+                <form class="inline_login_form" method="POST"
+                      id="__w2_LFLFV8F_login_form">
+                    <div class="form_inputs row">
+                        <div class="hidden small_login_preview e_col"
+                             id="__w2_LFLFV8F_preview"
+                             style="display: none;"><img width="25"
+                                                         height="25"
+                                                         id="__w2_LFLFV8F_pic">
+                        </div>
+                        <div class="col form_column"><input
+                                class="text header_login_text_box ignore_interaction"
+                                group="__w2_LFLFV8F_interaction"
+                                type="text" placeholder="Email"
+                                name="email" tabindex="1"
+                                w2cid="LFLFV8F" id="__w2_LFLFV8F_email">
+
+                            <div class="light_gray"
+                                 group="__w2_LFLFV8F_login_options"
+                                 id="__w2__u_Kv4UAY0xbn"><input
+                                    class="passwordless_checkbox ignore_interaction"
+                                    group="__w2_LFLFV8F_interaction"
+                                    type="checkbox" checked="checked"
+                                    name="allow_passwordless"
+                                    value="allow_passwordless"
+                                    tabindex="3" w2cid="LFLFV8F"
+                                    id="__w2_LFLFV8F_allow_passwordless">Remember
+                                Me
+                            </div>
+                        </div>
+                        <div class="col form_column"><input
+                                class="text header_login_text_box ignore_interaction"
+                                group="__w2_LFLFV8F_interaction"
+                                type="password" placeholder="Password"
+                                name="password" tabindex="2"
+                                w2cid="LFLFV8F"
+                                id="__w2_LFLFV8F_password">
+
+                            <div class="light_gray"
+                                 group="__w2_LFLFV8F_login_options"
+                                 id="__w2__u_oC6SJVTObn"><a href="#"
+                                                            id="__w2_LFLFV8F_forgot_password_link">Forgot
+                                Password?</a></div>
+                        </div>
+                        <div class="e_col"><input
+                                class="submit_button ignore_interaction submit_button_disabled"
+                                group="__w2_LFLFV8F_interaction"
+                                type="submit" value="Login" tabindex="4"
+                                w2cid="LFLFV8F"
+                                id="__w2_LFLFV8F_submit_button"></div>
+                        <div id="__w2_LFLFV8F_errors"><p
+                                class="hidden input_validation_error_text"
+                                id="__w2_LFLFV8F_email_not_confirmed_error"
+                                style="display: none;">Please confirm
+                            your email address. <a href="#"
+                                                   id="__w2_LFLFV8F_resend_confirmation">Resend
+                                Confirmation Link</a></p><span
+                                class="hidden input_validation_error_text"
+                                id="__w2_LFLFV8F_email_not_found_error"
+                                style="display: none;">No account found for this email. Retry, or <a
+                                href="/"
+                                id="__w2_LFLFV8F_email_not_found_signup_link">Sign
+                            up for Quora.</a></span><span
+                                class="hidden input_validation_error_text"
+                                id="__w2_LFLFV8F_incorrect_password_error"
+                                style="display: none;">Incorrect password.  <a
+                                href="#"
+                                id="__w2_LFLFV8F_reset_password_link">Reset
+                            Password</a></span></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row p0_5 hidden" id="__w2_LFLFV8F_login_tos">
+            <div class="light_gray small">By logging in you indicate
+                that you have read and agree to the <a href="/about/tos"
+                                                       target="_blank">Terms
+                    of Service</a>.
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="signup_form_big_buttons">
+        <div class="col connected_photo_wrapper  hidden"
+             id="__w2_DDmvDl7_connected_photo_wrapper">&nbsp;
+            <div class="hidden br3 tease_box connected_photo"
+                 id="__w2_DDmvDl7_connected_info"><img
+                    src="http://qsf.is.quoracdn.net/-24b280cb3f0a234e.gif"
+                    style="float:left;width:50px;"
+                    id="__w2_DDmvDl7_connected_pic"><label
+                    class="hidden" style="width:50px"
+                    id="__w2_DDmvDl7_fb_info"><img
+                    src="http://qsf.is.quoracdn.net/-3f97e9658610fd24.gif"
+                    style="padding-right: 5px;"><strong
+                    id="__w2_DDmvDl7_fb_name"></strong></label><label
+                    class="hidden" style="width:50px"
+                    id="__w2_DDmvDl7_twitter_info"><img width="16"
+                                                        style="padding-right: 5px;"
+                                                        height="16"
+                                                        src="http://qsf.is.quoracdn.net/-717943ea2ab806b1.png"><strong
+                    id="__w2_DDmvDl7_tw_name"></strong></label><label
+                    class="hidden" style="width:50px"
+                    id="__w2_DDmvDl7_goog_info"><img width="16"
+                                                     style="padding-right: 5px;"
+                                                     height="16"
+                                                     src="http://qsf.is.quoracdn.net/-0221ae28fc359ca7.png"><strong
+                    id="__w2_DDmvDl7_goog_name"></strong></label></div>
+        </div>
+        <div class="e_col w3_5 signup_form">
+            <form class="" action="/signup/signup_POST" method="POST"
+                  target="_self" id="__w2_DDmvDl7_form"><input
+                    type="hidden" name="formkey"
+                    value="541e60a826f0772279e66d8b04a9352a"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="code" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_code"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="group" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_group"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="source_user_name" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_source_user_name"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="source_url" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_source_url"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="signup_form"
+                    value="SignupFormBigButtonsOneClick" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_signup_form"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    name="source" value="home" w2cid="DDmvDl7"
+                    id="__w2_DDmvDl7_source"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    w2cid="DDmvDl7" id="__w2_DDmvDl7_fb_uid"><input
+                    group="__w2_DDmvDl7_interaction" type="hidden"
+                    w2cid="DDmvDl7" id="__w2_DDmvDl7_tw_uid">
+
+                <div class="row " id="__w2_DDmvDl7_step_1">
+                    <div class="row step_1_header"></div>
+                    <div class="row">
+                        <div class="e_col connect_buttons instruction_text three_connect_buttons"
+                             id="__w2_DDmvDl7_connect_buttons">
+                            <div class="row connect_buttons_row"><a
+                                    class="google_button submit_button"
+                                    href="#" tabindex="5"
+                                    id="__w2_DhivBhB_google_connect_button"><span
+                                    class="google_button_text">Sign Up With Google</span></a><span
+                                    class="hidden connected_link_text google_connected_link_text br3"
+                                    id="__w2_DDmvDl7_google_connected">Connected to Google</span><input
+                                    group="__w2_DDmvDl7_interaction"
+                                    type="hidden"
+                                    name="goog_access_token"
+                                    w2cid="DDmvDl7"
+                                    id="__w2_DDmvDl7_goog_access_token"><a
+                                    class="facebook_button submit_button"
+                                    href="#" tabindex="6"
+                                    id="__w2_OuQk8eW_facebook_connect_button"><span
+                                    class="facebook_button_text">Sign Up With Facebook</span></a><span
+                                    class="hidden connected_link_text facebook_connected_link_text br3"
+                                    id="__w2_DDmvDl7_facebook_connected">Connected to Facebook</span><input
+                                    group="__w2_DDmvDl7_interaction"
+                                    type="hidden" name="fb_access_token"
+                                    w2cid="DDmvDl7"
+                                    id="__w2_DDmvDl7_fb_access_token"><input
+                                    group="__w2_DDmvDl7_interaction"
+                                    type="hidden" name="fb_expires"
+                                    w2cid="DDmvDl7"
+                                    id="__w2_DDmvDl7_fb_expires"><a
+                                    class="twitter_button submit_button"
+                                    href="#" tabindex="6"
+                                    id="__w2_coos1fY_twitter_connect_button">Sign
+                                Up With Twitter</a><span
+                                    class="hidden connected_link_text twitter_connected_link_text br3"
+                                    id="__w2_DDmvDl7_twitter_connected">Connected to Twitter</span><input
+                                    group="__w2_DDmvDl7_interaction"
+                                    type="hidden"
+                                    name="twitter_oauth_key"
+                                    w2cid="DDmvDl7"
+                                    id="__w2_DDmvDl7_tw_oauth_key">
+                            </div>
+                            <div class="row connect_explanation"
+                                 id="__w2_DDmvDl7_connect_explanation">
+                                                            <span class="light">Or <span
+                                                                    id="__w2_DDmvDl7_connect_option"><a
+                                                                    href="#" tabindex="8"
+                                                                    id="__w2_DDmvDl7_bypass_connect_link">Sign
+                                                                Up With Email</a></span>. By signing up you indicate that you have read and agree to the </span><span
+                                    class="light"><a href="/about/tos"
+                                                     target="_blank">Terms
+                                of Service</a>.</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden step_2 row" id="__w2_DDmvDl7_step_2">
+                    <h2><span
+                            id="__w2_DDmvDl7_step_2_header_prefix"></span>Sign
+                        Up</h2>
+
+                    <div class="stacked_form e_col p1">
+                        <div class="form_row"><label>Full
+                            Name</label><input class="text"
+                                               group="__w2_DDmvDl7_interaction"
+                                               name="name"
+                                               autocorrect="off"
+                                               value=""
+                                               autocapitalize="words"
+                                               type="text" tabindex="9"
+                                               w2cid="DDmvDl7"
+                                               id="__w2_DDmvDl7_name">
+
+                            <div class="hidden __w2_tLc3e19_invalid input_validation_error_text"
+                                 id="__w2_tLc3e19_invalid_message"></div>
+                            <span class="hidden input_valid __w2_tLc3e19_valid input_status"></span><span
+                                    class="hidden input_invalid __w2_tLc3e19_invalid input_status"></span>
+
+                            <div class="hidden ">Checking...</div>
+                        </div>
+                        <div class="form_row"><label>Email</label><input
+                                class="text"
+                                group="__w2_DDmvDl7_interaction"
+                                type="text" name="email" value=""
+                                tabindex="10" w2cid="DDmvDl7"
+                                id="__w2_DDmvDl7_email">
+
+                            <div class="hidden __w2_FypAkqf_invalid input_validation_error_text"
+                                 id="__w2_FypAkqf_invalid_message"></div>
+                            <span class="hidden input_valid __w2_FypAkqf_valid input_status"></span><span
+                                    class="hidden input_invalid __w2_FypAkqf_invalid input_status"></span>
+
+                            <div class="hidden ">Checking...</div>
+                        </div>
+                        <div class="form_row">
+                            <label>Password</label><input class="text"
+                                                          group="__w2_DDmvDl7_interaction"
+                                                          type="password"
+                                                          name="password"
+                                                          tabindex="11"
+                                                          w2cid="DDmvDl7"
+                                                          id="__w2_DDmvDl7_password">
+
+                            <div class="hidden __w2_jwgc1tQ_invalid input_validation_error_text"
+                                 id="__w2_jwgc1tQ_invalid_message"></div>
+                            <span class="hidden input_valid __w2_jwgc1tQ_valid input_status"></span><span
+                                class="hidden input_invalid __w2_jwgc1tQ_invalid input_status"></span>
+
+                            <div class="hidden ">Checking...</div>
+                        </div>
+                    </div>
+                    <div class="row small"><span
+                            class="light_gray tos_disclaimer">By clicking "Sign Up" you indicate that you have read and agree to the <a
+                            href="/about/tos" target="_blank">Terms of
+                        Service</a>.</span></div>
+                    <div class="row">
+                        <div class="form_buttons"
+                             id="__w2_DDmvDl7_create_account"><span
+                                class="light"><a class="cancel" href="#"
+                                                 id="__w2_DDmvDl7_cancel">Cancel</a></span><input
+                                class="action_button"
+                                group="__w2_DDmvDl7_interaction"
+                                type="submit" value="Sign Up"
+                                tabindex="12" w2cid="DDmvDl7"
+                                id="__w2_DDmvDl7_submit"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row hidden connected_friends_list"
+             id="__w2_DDmvDl7_connected_friends_list">&nbsp;</div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer wrapper big_signup_footer" id="__w2_tFjzj91_footer_row"
+     style="bottom: auto; top: 517px;">
+    <div class="contents">
+        <div class="e_col w4">
+            <div class="earth_wrapper" id="__w2_tFjzj91_earth"><img width="430" height="130"
+                                                                    src="http://qsf.is.quoracdn.net/-634969e6796049f5.png">
+            </div>
+        </div>
+        <div class="e_col w3_5 side_col">
+            <div class="footer_nav row">
+                <div class="e_col footer_links row">
+                    <ul class="nav_list">
+                        <li class="about"><a href="/about">About</a></li>
+                        <li class="careers"><a href="/careers">Careers</a></li>
+                        <li class="privacy"><a href="/about/privacy">Privacy</a></li>
+                        <li class="tos"><a href="/about/tos">Terms</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ld_jobmqg_213"></div>
+<div class="__livenode_loading hidden" id="__w2_lIImRGO_loading">
+    <div class="__livenode_loading_spinner"></div>
+    Loading...
+</div>
+<div id="ld_jobmqg_214"></div>
+<div class="tiny_swf">
+    <object type="application/x-shockwave-flash" allowscriptaccess="always"
+            data="http://qsf.is.quoracdn.net/-ecc40f52619f79e0.swf" width="1" height="1"
+            id="__w2_YedNAD9_flash" style="visibility: visible;">
+        <param name="allowScriptAccess" value="always">
+        <param name="flashvars" value="domain=www.quora.com">
+    </object>
+</div>
+<script type="text/javascript">
+    if ($.loader) $.loader(window);
+</script>
+<script type="text/javascript">
+    require.enqueue(function (require) {
+        require('webnode2').windowId = "dep170-562876666545979231";
+    });
+</script>
+
+<script>
+    require.enqueue(function (require) {
+        require("tchannel_up").start(0, "main-w-dep170-562876666545979231", "chan3-8881", "quora.com", "");
+    });
+</script>
+<script type="text/javascript">
+    require.enqueue(function (require) {
+        require("cookies").cookie("tz", new Date().getTimezoneOffset(), {"path": "/"});
+    });
+</script>
+<script type="text/javascript">
+    $.whenIdle(350, 350, function () {
+        require.enqueue(function (require) {
+            if (window.w2_timing)
+                w2_timing.logTime('componentInitStart');
+            var W2 = require('webnode2'),
+                    LiveNode = require('w2.livenode');
+            W2.addComponentMetadata({parents: {"hoCxRMw": "*ROOT*", "R2LbRyl": "tFjzj91", "mIoxpcV": "fZl4yHw", "LFLFV8F": "FJSWGlL", "YedNAD9": "*ROOT*", "tTOYxkF": "fZl4yHw", "X2ydDbM": "mV1npAe", "DDmvDl7": "FJSWGlL", "OvvSyfG": "DDmvDl7", "g4kno2O": "*ROOT*", "XdU8gmc": "LFLFV8F", "kxYwIiX": "*ROOT*", "Ajboqhu": "FJSWGlL", "lIImRGO": "*ROOT*", "XLSsSk8": "mV1npAe", "DhivBhB": "DDmvDl7", "DhJH9Fm": "LFLFV8F", "yrLsvoY": "mV1npAe", "nDtIDhk": "*ROOT*", "jHzZSAe": "fZl4yHw", "mV1npAe": "tGrBC68", "WfuEAVl": "*ROOT*", "coos1fY": "DDmvDl7", "jwgc1tQ": "DDmvDl7", "tGrBC68": "*ROOT*", "fZl4yHw": "R2LbRyl", "SpQHS13": "FJSWGlL", "FypAkqf": "DDmvDl7", "S2LVi7X": "mV1npAe", "tFjzj91": "tGrBC68", "OuQk8eW": "DDmvDl7", "S6T5Ipk": "fZl4yHw", "q4UvU0b": "tGrBC68", "DHhBsrp": "Q2IFF5e", "FJSWGlL": "mV1npAe", "tLc3e19": "DDmvDl7", "Q2IFF5e": "*ROOT*"}, children: {"DDmvDl7": {"email_validator": "FypAkqf", "name_validator": "tLc3e19", "google_connect_button": "DhivBhB", "password_validator": "jwgc1tQ", "facebook_connect_button": "OuQk8eW", "twitter_connect_button": "coos1fY"}}, knowsAbout: {"FJSWGlL": {"home_logged_out": "."}, "DDmvDl7": {"facebook_connect_button": "facebook_connect_button"}, "LFLFV8F": {"inline_login": "."}, "tGrBC68": {"content": "content", "layout": "."}}, groups: {"__w2_DDmvDl7_interaction": ["__w2_DDmvDl7_code", "__w2_DDmvDl7_group", "__w2_DDmvDl7_source_user_name", "__w2_DDmvDl7_source_url", "__w2_DDmvDl7_signup_form", "__w2_DDmvDl7_source", "__w2_DDmvDl7_fb_uid", "__w2_DDmvDl7_tw_uid", "__w2_DDmvDl7_goog_access_token", "__w2_DDmvDl7_fb_access_token", "__w2_DDmvDl7_fb_expires", "__w2_DDmvDl7_tw_oauth_key", "__w2_DDmvDl7_name", "__w2_DDmvDl7_email", "__w2_DDmvDl7_password", "__w2_DDmvDl7_submit"], "__w2_LFLFV8F_interaction": ["__w2_LFLFV8F_email", "__w2_LFLFV8F_allow_passwordless", "__w2_LFLFV8F_password", "__w2_LFLFV8F_submit_button"], "__w2_LFLFV8F_login_options": ["__w2__u_Kv4UAY0xbn", "__w2__u_oC6SJVTObn"]}, domids: {"FJSWGlL": "ld_efajki_231852", "DhJH9Fm": "ld_czwqca_178612", "LFLFV8F": "ld_pvnwpv_229636", "mV1npAe": "ld_jobmqg_212", "kxYwIiX": "ld_jobmqg_213", "Q2IFF5e": "ld_jobmqg_214"}});
+            var _components = [new (W2._InteractionModeBanner)("WfuEAVl", "", {"new_grid": false}, "hmac:4R3MtyRZUPRtRl", {}), new (require("w2.livenode").ConnectionWarningBanner)("g4kno2O", "", null, "hmac:kQbnDQQBv789jz", {}), new (require("w2.livenode").ErrorBanner)("hoCxRMw", "", {"new_grid": false}, "hmac:2O1ftyp2jLiIaD", {}), new (require("app/view/components").JSTest)("q4UvU0b", "", {}, "hmac:DAalTWsvfBzxrO", {}), new (require("app/view/layout").LoggedOutBigSignupFooter)("tFjzj91", "", {}, "hmac:f32/BHOyFBWehd", {}), new (require('login').LoginSignal)("kxYwIiX", "", {"uid": null}, "hmac:H4N6YL2RRfUEoi", {}), new (require('login').LiveLogin)("nDtIDhk", "", {}, "hmac:8RVxElLKc7Cyo5", {}), new (require("w2.livenode").LoadingBanner)("lIImRGO", "", null, "hmac:cjnMA5HwfoZR21", {}), new (require('facebook').FacebookAccessTokenRefresher)("DHhBsrp", "", {}, "hmac:8sPHrRXxQOxkic", {}), new (require("flash").FlashClient)("YedNAD9", "", {"cp": "m", "swf_url": "http://qsf.is.quoracdn.net/-ecc40f52619f79e0.swf", "fc": "uz7n2td2CxkwRfXFqty5dg==", "so": "main-client-1", "flash_vars": {"domain": "www.quora.com"}}, "hmac:TKP67vMcwwrO3l", {}), new (require("app/view/layout").ContentWrapper)("mV1npAe", "", {}, "hmac:PmJZdRvgjJvVK0", {}), new (require("app/view/pmsg/pmsg").PMsgContainer)("yrLsvoY", "", {}, "hmac:Z36MqySU3Cjjif", {}), new (require("app/view/layout").QTextImageEnlarger)("S2LVi7X", "", {}, "hmac:S4wcGVzUxxHge1", {}), new (require("app/view/layout").QTextEmbedEnlarger)("XLSsSk8", "", {}, "hmac:fTqTKBA8YOwpQv", {}), new (require("app/view/layout").QTextGIFPlayer)("X2ydDbM", "", {}, "hmac:dZUKqgrmjfibWg", {}), new (require("facebook").FacepilePlugin)("SpQHS13", "", {}, "hmac:iYWBr33BA8jLlB", {}), new (require('login').LoginPageLoginListener)("Ajboqhu", "", {"next": "http://www.quora.com/"}, "hmac:nuxb4Hsod+K+Re", {}), new (require('app/view/signup').SignupFormBigButtons)("DDmvDl7", "", {"code": null, "no_associated_users": true, "hide_welcome_on_connect": false, "minimum_password_length": 5, "next_url": null, "tid": null, "hide_step1_header_on_step2": false, "inline_login": false, "show_explanation": false}, "hmac:b+F4sdSnUyzftq", {}), new (require("app/view/signup/google_").SignupGoogleConnectButton)("DhivBhB", "google_connect_button", {"perms": "no_contacts", "url": "http://www.quora.com/google_/oauth_window"}, "hmac:dVzuhJyHxdVbMV", {}), new (require("facebook").SignupFacebookConnectButton)("OuQk8eW", "facebook_connect_button", {"perms": "user_hometown,user_location,user_work_history,user_education_history,email,publish_actions,read_friendlists,user_likes"}, "hmac:Wst6HxW8jmHgtn", {}), new (require("twitter").SignupTwitterConnectButton)("coos1fY", "twitter_connect_button", {}, "hmac:4GXX54IqrPsFzu", {}), new (W2.InputValidator)("tLc3e19", "name_validator", {"id": "@name"}, "hmac:iYa3AbfkKH5eZM", {}), new (W2.InputValidator)("FypAkqf", "email_validator", {"id": "@email"}, "hmac:fMrfC6SP0jlQLX", {}), new (W2.InputValidator)("jwgc1tQ", "password_validator", {"id": "@password"}, "hmac:G5tPizlWGiDeuW", {}), new (require("login").LoggedOutHomeHeaderInlineLogin)("LFLFV8F", "", {}, "hmac:nZJIEhRrZfyXGv", {})];
+            W2.registerComponents(_components);
+            W2.onLoad(_components, true);
+            if (window.w2_timing)
+                w2_timing.logTime('componentInitEnd');
+
+            (function () {
+                w2_timing.logTime('postOnLoad');
+                var timing = w2_timing.timing;
+                $.whenLoaded(1, function () {
+                })
+            })();
+        })
+    }, "Initialize components");</script>
+<script type="text/javascript">
+    require.enqueue(function (require) {
+        var twRootNode = document.createElement("div");
+        twRootNode.setAttribute("id", "tw-root");
+        document.body.appendChild(twRootNode);
+        require("twitter").asyncInit();
+    });
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-16618355-1']);
+    _gaq.push(['_setDomainName', 'quora.com']);
+    _gaq.push(['_setCustomVar', 1, 'is_logged_in', 'false', 3]);
+    _gaq.push(['_setCustomVar', 2, 'is_mobile', 'false', 3]);
+    _gaq.push(['_trackPageLoadTime']);
+
+
+    _gaq.push(['_setCustomVar', 4, 'page_type', 'Home', 3]);
+    _gaq.push(['_trackPageview']);
+
+    require('win.load').add(function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    });
+</script>
+<div id="tw-root">
+    <script async="" src="//platform.twitter.com/widgets.js"></script>
+</div>
+<script type="text/javascript">
+    require.enqueue(function (require) {
+        $(document).ready(function () {
+            w2_timing.logTime('documentReady');
+        });
+        $(window).load(function () {
+            var timing = w2_timing.timing;
+            w2_timing.logTime('windowLoad');
+
+            timing.server_time = 32.83;
+            timing.window_id = "dep170-562876666545979231";
+        });
+    });
+
+    var timing = require("w2.timing").timing;
+    timing.page = 32.83;
+    timing.request = 48.06;</script>
+<div id="fb-root" class=" fb_reset">
+    <script async="" src="//connect.facebook.net/en_US/all.js"></script>
+    <div style="position: absolute; top: -10000px; height: 0px; width: 0px;">
+        <div></div>
+    </div>
+    <div style="position: absolute; top: -10000px; height: 0px; width: 0px;">
+        <div>
+            <iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no"
+                    id="fb_xdm_frame_http" aria-hidden="true"
+                    title="Facebook Cross Domain Communication Frame" tabindex="-1"
+                    src="http://static.ak.facebook.com/connect/xd_arbiter/DhmkJ2TR0QN.js?version=41#channel=f226e62ba4&amp;origin=http%3A%2F%2Fwww.quora.com"
+                    style="border: none;"></iframe>
+            <iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true"
+                    scrolling="no" id="fb_xdm_frame_https" aria-hidden="true"
+                    title="Facebook Cross Domain Communication Frame" tabindex="-1"
+                    src="https://s-static.ak.facebook.com/connect/xd_arbiter/DhmkJ2TR0QN.js?version=41#channel=f226e62ba4&amp;origin=http%3A%2F%2Fwww.quora.com"
+                    style="border: none;"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+</html>

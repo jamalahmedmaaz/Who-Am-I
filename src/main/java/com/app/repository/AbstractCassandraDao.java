@@ -3,6 +3,7 @@ package com.app.repository;
 import com.datastax.driver.core.querybuilder.Clause;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public interface AbstractCassandraDao<T, ID extends Serializable> {
 
     public abstract List<T> findByProperties(final Map<String, ? extends Serializable> keyValuePairs);
 
-    public abstract T insertOrUpdate(T instance);
+    public abstract T insertOrUpdate(T instance) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException;
 
     public abstract void delete(T persistentInstance);
 
