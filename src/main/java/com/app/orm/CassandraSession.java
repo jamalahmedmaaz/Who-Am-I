@@ -24,12 +24,15 @@ public class CassandraSession {
             for (Map.Entry<String, Pair> entry : columnToDBMap.entrySet()) {
                 dataMap.addColumn(entry.getKey(), entry.getValue().getSecond().toString(), entry.getValue().getFirst().toString(), dataMap);
             }
+            if (mappedEntities.get(entity.getSimpleName()) != null) {
+                throw new RuntimeException("Duplicate entity Name");
+            }
             mappedEntities.put(entity.getSimpleName(), dataMap);
-            System.out.println(mappedEntities);
         }
     }
 
     public static void main(String... ar) throws ClassNotFoundException {
         CassandraSession cassandraSession = new CassandraSession();
+        System.out.println(cassandraSession);
     }
 }
