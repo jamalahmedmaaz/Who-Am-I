@@ -20,9 +20,13 @@ public class CassandraSession {
         Set<Class<?>> entities = JReflectionUtils.getAllMappedEntities("com.app.orm");
         for (Class<?> entity : entities) {
             DataMap dataMap = new DataMap(entity, JReflectionUtils.getTableName(entity));
-            Map<String, Pair> columnToDBMap = JReflectionUtils.getColumnName(entity);
-            for (Map.Entry<String, Pair> entry : columnToDBMap.entrySet()) {
-                dataMap.addColumn(entry.getKey(), entry.getValue().getSecond().toString(), entry.getValue().getFirst().toString(), dataMap);
+            Map<String, Triplet> columnToDBMap = JReflectionUtils.getColumnName(entity);
+            for (Map.Entry<String, Triplet> entry : columnToDBMap.entrySet()) {
+                dataMap.addColumn(entry.getKey(),
+                        entry.getValue().getSecond().toString(),
+                        entry.getValue().getFirst().toString(),
+                        dataMap,
+                        Boolean.valueOf(entry.getValue().getThird().toString()));
             }
             if (mappedEntities.get(entity.getSimpleName()) != null) {
                 throw new RuntimeException("Duplicate entity Name");
@@ -34,5 +38,9 @@ public class CassandraSession {
     public static void main(String... ar) throws ClassNotFoundException {
         CassandraSession cassandraSession = new CassandraSession();
         System.out.println(cassandraSession);
+    }
+
+    public JQuery createQuery(Class aClass) {
+        return new JQuery(aClass);
     }
 }

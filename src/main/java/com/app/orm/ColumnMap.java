@@ -8,11 +8,20 @@ import java.lang.reflect.Field;
 public class ColumnMap {
 
     private String columnName;
+    private boolean isPrimaryKey;
     private String fieldName;
     private Field field;
     private DataMap dataMap;
 
     public ColumnMap(String nameOfField, String dataType, String nameOfColumn, DataMap dataMap) {
+        this.columnName = nameOfColumn;
+        this.fieldName = nameOfField;
+        this.dataMap = dataMap;
+        initializeField();
+    }
+
+    public ColumnMap(String nameOfField, String dataType, String nameOfColumn, DataMap dataMap, boolean isPrimaryKey) {
+        this.isPrimaryKey = isPrimaryKey;
         this.columnName = nameOfColumn;
         this.fieldName = nameOfField;
         this.dataMap = dataMap;
@@ -60,6 +69,14 @@ public class ColumnMap {
         this.dataMap = dataMap;
     }
 
+    public boolean getIsPrimaryKey() {
+        return isPrimaryKey;
+    }
+
+    public void setIsPrimaryKey(boolean isPrimaryKey) {
+        this.isPrimaryKey = isPrimaryKey;
+    }
+
     public void setField(Object domainObject, Object columnValue) {
         try {
             field.set(domainObject, columnValue);
@@ -74,5 +91,15 @@ public class ColumnMap {
         } catch (IllegalAccessException e) {
             throw new RuntimeException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ColumnMap{" +
+                "columnName='" + columnName + '\'' +
+                ", fieldName='" + fieldName + '\'' +
+                ", field=" + field +
+                ", dataMap=" + dataMap +
+                '}';
     }
 }

@@ -34,8 +34,8 @@ public class JReflectionUtils {
         return annotation.name();
     }
 
-    public static Map<String, Pair> getColumnName(Class<?> entity) throws ClassNotFoundException {
-        Map<String, Pair> mapOfFieldToDbColumnMapping = Maps.newHashMap();
+    public static Map<String, Triplet> getColumnName(Class<?> entity) throws ClassNotFoundException {
+        Map<String, Triplet> mapOfFieldToDbColumnMapping = Maps.newHashMap();
         Class aClass = Class.forName(entity.getName());
         for (Field field : aClass.getDeclaredFields()) {
             for (Annotation annotation : field.getAnnotations()) {
@@ -48,7 +48,7 @@ public class JReflectionUtils {
                     } else {
                         dbFieldName = field.getName();
                     }
-                    mapOfFieldToDbColumnMapping.put(field.getName(), new Pair<String, String>(dbFieldName, mapToDataSourceType(field.getType().getSimpleName())));
+                    mapOfFieldToDbColumnMapping.put(field.getName(), new Triplet(dbFieldName, mapToDataSourceType(field.getType().getSimpleName()), false));
                 }
                 if (fieldAnnotation == JPrimaryKey.class) {
                     JPrimaryKey jPrimaryKey = field.getAnnotation(JPrimaryKey.class);
@@ -58,7 +58,7 @@ public class JReflectionUtils {
                     } else {
                         dbFieldName = field.getName();
                     }
-                    mapOfFieldToDbColumnMapping.put(field.getName(), new Pair<String, String>(dbFieldName, mapToDataSourceType(field.getType().getSimpleName())));
+                    mapOfFieldToDbColumnMapping.put(field.getName(), new Triplet(dbFieldName, mapToDataSourceType(field.getType().getSimpleName()), true));
                 }
             }
 

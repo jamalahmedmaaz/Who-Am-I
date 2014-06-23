@@ -48,6 +48,10 @@ public class DataMap {
         columnMaps.add(new ColumnMap(nameOfField, dataType, nameOfColumn, dataMap));
     }
 
+    public void addColumn(String nameOfField, String dataType, String nameOfColumn, DataMap dataMap, boolean primaryKey) {
+        columnMaps.add(new ColumnMap(nameOfField, dataType, nameOfColumn, dataMap, primaryKey));
+    }
+
     public String columnList() {
         StringBuffer stringBuffer = new StringBuffer();
         int count = 0;
