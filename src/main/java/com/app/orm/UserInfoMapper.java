@@ -11,7 +11,7 @@ public class UserInfoMapper extends Mapper {
 
     protected void loadDataMap() {
         dataMap = new DataMap(UserInfo.class, "userInfo");
-        dataMap.addColumn("lastName", "varachar", "lastName");
+        dataMap.addColumn("lastName", "varachar", "lastName", null);
     }
 
     public UserInfo find(Long key) {

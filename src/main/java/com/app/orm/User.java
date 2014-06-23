@@ -6,7 +6,7 @@ package com.app.orm;
 @JCassandraEntity(name = "userInfo")
 public class User {
 
-    @PrimaryKey
+    @JPrimaryKey(name = "id")
     private Long id;
     @JCassandraColumn(name = "userName")
     private String name;

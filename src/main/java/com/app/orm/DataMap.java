@@ -1,6 +1,5 @@
 package com.app.orm;
 
-import com.app.model.UserInfo;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -13,13 +12,12 @@ public class DataMap {
     private String tableName;
     private List<ColumnMap> columnMaps = Lists.newArrayList();
 
-    public DataMap(Class<UserInfo> domainClass, String tableName) {
+    public DataMap(Class<?> domainClass, String tableName) {
         this.domainClass = domainClass;
         this.tableName = tableName;
     }
 
     public DataMap() {
-
     }
 
     public Class getDomainClass() {
@@ -46,8 +44,8 @@ public class DataMap {
         this.columnMaps = columnMaps;
     }
 
-    public void addColumn(String nameOfColumn, String dataType, String nameOfField) {
-        columnMaps.add(new ColumnMap(nameOfColumn, dataType, nameOfField));
+    public void addColumn(String nameOfField, String dataType, String nameOfColumn, DataMap dataMap) {
+        columnMaps.add(new ColumnMap(nameOfField, dataType, nameOfColumn, dataMap));
     }
 
     public String columnList() {

@@ -12,9 +12,10 @@ public class ColumnMap {
     private Field field;
     private DataMap dataMap;
 
-    public ColumnMap(String nameOfColumn, String dataType, String nameOfField) {
+    public ColumnMap(String nameOfField, String dataType, String nameOfColumn, DataMap dataMap) {
         this.columnName = nameOfColumn;
         this.fieldName = nameOfField;
+        this.dataMap = dataMap;
         initializeField();
     }
 
