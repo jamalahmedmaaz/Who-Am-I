@@ -1,16 +1,21 @@
 package com.app.orm;
 
+import com.datastax.driver.core.SimpleStatement;
+import com.datastax.driver.core.Statement;
 import com.google.common.collect.Maps;
+import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by cassandra on 6/23/14.
  */
+@Service
 public class CassandraSession {
 
     private Map<String, DataMap> mappedEntities = Maps.newHashMap();
+    private JUnitOfWork JUnitOfWork;
+
 
     public CassandraSession() throws ClassNotFoundException {
         initialized();
@@ -37,10 +42,28 @@ public class CassandraSession {
 
     public static void main(String... ar) throws ClassNotFoundException {
         CassandraSession cassandraSession = new CassandraSession();
+        JQuery jQuery = cassandraSession.createQuery(User.class);
+        jQuery.addCriteria(JCriteria.equals("name", "don"));
+        List entities = jQuery.getResults();
         System.out.println(cassandraSession);
     }
 
     public JQuery createQuery(Class aClass) {
-        return new JQuery(aClass);
+        return new JQuery(aClass, this);
+    }
+
+    public List getResult(JQuery jQuery) {
+        if (JUnitOfWork.getObject(jQuery.getIdentifier()) != null) {
+            return new ArrayList((Collection) JUnitOfWork.getObject(jQuery.getIdentifier()));
+        }
+
+        // Need to move this loaders.
+        String query = jQuery.generateSelectQuery();
+        Statement statement = new SimpleStatement(query);
+        return null;
+    }
+
+    public DataMap getDataMap(String entityName) {
+        return mappedEntities.get(entityName);
     }
 }

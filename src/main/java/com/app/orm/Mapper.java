@@ -9,11 +9,11 @@ import java.sql.SQLException;
  */
 public class Mapper {
 
-    private UnitOfWork unitOfWork;
+    private JUnitOfWork JUnitOfWork;
     private DataMap dataMap;
 
     public Object findObject(Long key) {
-        if (unitOfWork.isLoaded(key)) return unitOfWork.getObject(key);
+        if (JUnitOfWork.isLoaded(key)) return JUnitOfWork.getObject(key);
         String sql = "SELECT " + dataMap.columnList() + " FROM " + dataMap.getTableName() + " Where " +
                 "ID =?";
 
@@ -57,11 +57,11 @@ public class Mapper {
 
     private DomainObject load(ResultSet resultSet) throws IllegalAccessException, InstantiationException, SQLException {
         Long key = new Long(resultSet.getLong("ID"));
-        if (unitOfWork.isLoaded(key)) return (DomainObject) unitOfWork.getObject(key);
+        if (JUnitOfWork.isLoaded(key)) return (DomainObject) JUnitOfWork.getObject(key);
         DomainObject domainObject = (DomainObject) dataMap.getDomainClass().newInstance();
 
         domainObject.setId(key);
-        unitOfWork.registerClean(domainObject);
+        JUnitOfWork.registerClean(domainObject);
         loadFields(resultSet, domainObject);
 
         return domainObject;

@@ -25,10 +25,13 @@ public class JCriteria {
         return new JCriteria(" > ", fieldName, value);
     }
 
-    public static void main(String... ar) throws ClassNotFoundException {
-        CassandraSession cassandraSession = new CassandraSession();
-        JQuery jQuery = cassandraSession.createQuery(User.class);
-        JCriteria jCriteria = null;
-        System.out.println(cassandraSession);
+
+    public static JCriteria equals(String fieldName, String value) {
+        return new JCriteria(" = ", fieldName, value);
+    }
+
+    @Override
+    public String toString() {
+        return field + " " + cqlOpertor + " " + value;
     }
 }
