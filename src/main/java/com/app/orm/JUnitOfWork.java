@@ -22,6 +22,20 @@ public class JUnitOfWork {
     private List removedObjects = Lists.newArrayList();
 
 
+    private static ThreadLocal current = new ThreadLocal();
+
+    public static void newCurrent() {
+        setCurrent(new JUnitOfWork());
+    }
+
+    public static void setCurrent(JUnitOfWork juow) {
+        current.set(juow);
+    }
+
+    public static JUnitOfWork getCurrent() {
+        return (JUnitOfWork) current.get();
+    }
+
     public void registerNew(Object object) {
         newObjects.add(object);
     }
