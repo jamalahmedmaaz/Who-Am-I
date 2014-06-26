@@ -12,7 +12,7 @@ import java.util.List;
 public class JQuery {
     private Class klass;
     private List<JCriteria> criteria = Lists.newArrayListWithExpectedSize(0);
-    private CassandraSession cassandraSession;
+    private CassandraSessionImpl cassandraSessionImpl;
     private Long identifier;
 
     public JQuery(Class klass, List criteria) {
@@ -20,15 +20,15 @@ public class JQuery {
         this.criteria = criteria;
     }
 
-    public JQuery(Class klass, CassandraSession cassandraSession) {
+    public JQuery(Class klass, CassandraSessionImpl cassandraSessionImpl) {
         this.klass = klass;
-        this.cassandraSession = cassandraSession;
+        this.cassandraSessionImpl = cassandraSessionImpl;
     }
 
-    public JQuery(Class klass, List criteria, CassandraSession cassandraSession) {
+    public JQuery(Class klass, List criteria, CassandraSessionImpl cassandraSessionImpl) {
         this.klass = klass;
         this.criteria = criteria;
-        this.cassandraSession = cassandraSession;
+        this.cassandraSessionImpl = cassandraSessionImpl;
     }
 
     public JQuery(Class klass) {
@@ -43,7 +43,7 @@ public class JQuery {
     }
 
     public List getResults() {
-        return cassandraSession.getResult(this);
+        return cassandraSessionImpl.getResult(this);
     }
 
     public Long getIdentifier() {
@@ -57,11 +57,11 @@ public class JQuery {
 
 
     public String getAllFields() {
-        return cassandraSession.getDataMap(klass.getSimpleName()).columnList();
+        return cassandraSessionImpl.getDataMap(klass.getSimpleName()).columnList();
     }
 
     public Object getTableName() {
-        return cassandraSession.getDataMap(klass.getSimpleName()).getTableName();
+        return cassandraSessionImpl.getDataMap(klass.getSimpleName()).getTableName();
     }
 
     public String getCriterias() {
@@ -94,12 +94,12 @@ public class JQuery {
         this.criteria = criteria;
     }
 
-    public CassandraSession getCassandraSession() {
-        return cassandraSession;
+    public CassandraSessionImpl getCassandraSessionImpl() {
+        return cassandraSessionImpl;
     }
 
-    public void setCassandraSession(CassandraSession cassandraSession) {
-        this.cassandraSession = cassandraSession;
+    public void setCassandraSessionImpl(CassandraSessionImpl cassandraSessionImpl) {
+        this.cassandraSessionImpl = cassandraSessionImpl;
     }
 
     public void setIdentifier(Long identifier) {

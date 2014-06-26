@@ -3,7 +3,7 @@ package com.app.orm;
 /**
  * User: Jamal
  * Date: 6/27/14
- * Time: 1:00 AM
+ * Time: 1:01 AM
  */
-public interface CassandraSession {
+public interface GenericMap {
 }

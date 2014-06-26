@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 /**
  * Created by cassandra on 6/22/14.
  */
-public class ColumnMap {
+public class ColumnMap implements GenericMap {
 
     private String columnName;
     private boolean isPrimaryKey;
