@@ -1,5 +1,6 @@
-package com.app.orm;
+package com.app.orm.query;
 
+import com.app.orm.session.JCassandraSessionImpl;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class JQuery {
     private Class klass;
     private List<JCriteria> criteria = Lists.newArrayListWithExpectedSize(0);
-    private CassandraSessionImpl cassandraSessionImpl;
+    private JCassandraSessionImpl cassandraSessionImpl;
     private Long identifier;
 
     public JQuery(Class klass, List criteria) {
@@ -20,12 +21,12 @@ public class JQuery {
         this.criteria = criteria;
     }
 
-    public JQuery(Class klass, CassandraSessionImpl cassandraSessionImpl) {
+    public JQuery(Class klass, JCassandraSessionImpl cassandraSessionImpl) {
         this.klass = klass;
         this.cassandraSessionImpl = cassandraSessionImpl;
     }
 
-    public JQuery(Class klass, List criteria, CassandraSessionImpl cassandraSessionImpl) {
+    public JQuery(Class klass, List criteria, JCassandraSessionImpl cassandraSessionImpl) {
         this.klass = klass;
         this.criteria = criteria;
         this.cassandraSessionImpl = cassandraSessionImpl;
@@ -94,11 +95,11 @@ public class JQuery {
         this.criteria = criteria;
     }
 
-    public CassandraSessionImpl getCassandraSessionImpl() {
+    public JCassandraSessionImpl getCassandraSessionImpl() {
         return cassandraSessionImpl;
     }
 
-    public void setCassandraSessionImpl(CassandraSessionImpl cassandraSessionImpl) {
+    public void setCassandraSessionImpl(JCassandraSessionImpl cassandraSessionImpl) {
         this.cassandraSessionImpl = cassandraSessionImpl;
     }
 

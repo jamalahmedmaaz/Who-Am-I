@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.helpers;
 
 /**
  * Created by cassandra on 6/22/14.

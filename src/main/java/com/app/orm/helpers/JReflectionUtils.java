@@ -1,5 +1,8 @@
-package com.app.orm;
+package com.app.orm.helpers;
 
+import com.app.orm.annotation.JCassandraColumn;
+import com.app.orm.annotation.JCassandraEntity;
+import com.app.orm.annotation.JPrimaryKey;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.reflections.Reflections;
@@ -17,15 +20,6 @@ public class JReflectionUtils {
     public static Set<Class<?>> getAllMappedEntities(String packageLocation) {
         Reflections reflections = new Reflections(packageLocation);
         return reflections.getTypesAnnotatedWith(JCassandraEntity.class);
-    }
-
-    public static void main(String arp[]) throws ClassNotFoundException {
-        Set<Class<?>> entities = getAllMappedEntities("com.app.orm");
-        for (Class<?> entity : entities) {
-            getTableName(entity);
-            getColumnName(entity);
-        }
-
     }
 
     public static String getTableName(Class<?> entity) {
@@ -69,4 +63,15 @@ public class JReflectionUtils {
     private static String mapToDataSourceType(String javaDataTypeString) {
         return javaDataTypeString;
     }
+
+    public static void main(String arp[]) throws ClassNotFoundException {
+        Set<Class<?>> entities = getAllMappedEntities("com.app.orm");
+        for (Class<?> entity : entities) {
+            getTableName(entity);
+            getColumnName(entity);
+        }
+
+    }
 }
+
+

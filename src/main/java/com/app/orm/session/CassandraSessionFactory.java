@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.session;
 
 /**
  * Created by cassandra on 6/23/14.

@@ -1,4 +1,8 @@
-package com.app.orm;
+package com.app.orm.helpers;
+
+import com.app.orm.annotation.JCassandraColumn;
+import com.app.orm.annotation.JCassandraEntity;
+import com.app.orm.annotation.JPrimaryKey;
 
 /**
  * Created by cassandra on 6/23/14.
@@ -11,8 +15,11 @@ public class User {
     @JCassandraColumn(name = "userName")
     private String name;
 
+    @JCassandraColumn(name = "email")
     private String email;
 
+    @JCassandraColumn(name = "address")
+    private String address;
 
     public Long getId() {
         return id;
@@ -36,5 +43,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

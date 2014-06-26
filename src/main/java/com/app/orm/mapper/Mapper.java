@@ -1,4 +1,7 @@
-package com.app.orm;
+package com.app.orm.mapper;
+
+import com.app.orm.helpers.DB;
+import com.app.orm.helpers.DomainObject;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Mapper {
 
-    private JUnitOfWork JUnitOfWork;
+    private com.app.orm.session.JUnitOfWork JUnitOfWork;
     private DataMap dataMap;
 
     public Object findObject(Long key) {

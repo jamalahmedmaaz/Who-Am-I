@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.query;
 
 /**
  * User: Jamal

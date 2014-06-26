@@ -1,4 +1,6 @@
-package com.app.orm;
+package com.app.orm.mapper;
+
+import com.app.orm.helpers.DomainObject;
 
 import java.lang.reflect.Field;
 

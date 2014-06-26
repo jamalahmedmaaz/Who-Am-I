@@ -1,5 +1,6 @@
-package com.app.orm;
+package com.app.orm.session;
 
+import com.app.orm.helpers.DomainObject;
 import com.google.common.collect.Lists;
 
 import java.util.List;

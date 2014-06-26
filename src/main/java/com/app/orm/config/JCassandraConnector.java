@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.config;
 
 /**
  * User: Jamal
@@ -11,7 +11,7 @@ import com.datastax.driver.core.Host;
 import com.datastax.driver.core.Metadata;
 import com.datastax.driver.core.Session;
 
-public class CassandraConnector {
+public class JCassandraConnector {
     private Cluster cluster;
     private Session session;
 

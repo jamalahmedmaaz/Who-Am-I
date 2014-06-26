@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.helpers;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

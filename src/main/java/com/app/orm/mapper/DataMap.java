@@ -1,4 +1,4 @@
-package com.app.orm;
+package com.app.orm.mapper;
 
 import com.google.common.collect.Lists;
 

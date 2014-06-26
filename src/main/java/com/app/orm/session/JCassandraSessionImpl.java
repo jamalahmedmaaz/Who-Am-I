@@ -1,5 +1,13 @@
-package com.app.orm;
+package com.app.orm.session;
 
+import com.app.orm.config.JCassandraConnector;
+import com.app.orm.helpers.JReflectionUtils;
+import com.app.orm.helpers.Triplet;
+import com.app.orm.helpers.User;
+import com.app.orm.mapper.ColumnMap;
+import com.app.orm.mapper.DataMap;
+import com.app.orm.query.JCriteria;
+import com.app.orm.query.JQuery;
 import com.datastax.driver.core.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -13,12 +21,12 @@ import java.util.*;
  * Created by cassandra on 6/23/14.
  */
 @Service
-public class CassandraSessionImpl implements CassandraSession {
+public class JCassandraSessionImpl implements JCassandraSession {
 
     private Map<String, DataMap> mappedEntities = Maps.newHashMap();
     private JUnitOfWork jUnitOfWork;
 
-    public CassandraSessionImpl() throws ClassNotFoundException {
+    public JCassandraSessionImpl() throws ClassNotFoundException {
         initialized();
     }
 
@@ -41,14 +49,6 @@ public class CassandraSessionImpl implements CassandraSession {
         }
     }
 
-    public static void main(String... ar) throws ClassNotFoundException {
-        CassandraSessionImpl cassandraSessionImpl = new CassandraSessionImpl();
-        JQuery jQuery = cassandraSessionImpl.createQuery(User.class);
-        jQuery.addCriteria(JCriteria.equals("userName", "johndoe"));
-        List entities = jQuery.getResults();
-        System.out.println(cassandraSessionImpl);
-    }
-
     public JQuery createQuery(Class aClass) {
         return new JQuery(aClass, this);
     }
@@ -64,8 +64,8 @@ public class CassandraSessionImpl implements CassandraSession {
         // Need to move this loaders.
         String query = jQuery.generateSelectQuery();
         Statement statement = new SimpleStatement(query);
-        CassandraConnector cassandraConnector = new CassandraConnector();
-        Session session = cassandraConnector.getSession();
+        JCassandraConnector JCassandraConnector = new JCassandraConnector();
+        Session session = JCassandraConnector.getSession();
         System.out.println(statement.toString());
         ResultSet resultSet = session.execute(statement);
         return resultToEntityMapper(resultSet, jQuery);
@@ -118,6 +118,14 @@ public class CassandraSessionImpl implements CassandraSession {
 
     public DataMap getDataMap(String entityName) {
         return mappedEntities.get(entityName);
+    }
+
+    public static void main(String... ar) throws ClassNotFoundException {
+        JCassandraSessionImpl cassandraSessionImpl = new JCassandraSessionImpl();
+        JQuery jQuery = cassandraSessionImpl.createQuery(User.class);
+        jQuery.addCriteria(JCriteria.equals("userName", "johndoe"));
+        List<User> entities = jQuery.getResults();
+        System.out.println(entities);
     }
 }
 

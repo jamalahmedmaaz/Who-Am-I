@@ -1,6 +1,8 @@
-package com.app.orm;
+package com.app.orm.helpers;
 
 import com.app.model.UserInfo;
+import com.app.orm.mapper.DataMap;
+import com.app.orm.mapper.Mapper;
 
 /**
  * Created by cassandra on 6/22/14.
