@@ -21,7 +21,6 @@ public class JUnitOfWork {
     private List dirtyObjects = Lists.newArrayList();
     private List removedObjects = Lists.newArrayList();
 
-
     private static ThreadLocal current = new ThreadLocal();
 
     public static void newCurrent() {
@@ -47,7 +46,8 @@ public class JUnitOfWork {
     }
 
     public void registerRemoved(Object object) {
-        if (newObjects.remove(object)) return;
+        if (newObjects.remove(object))
+            return;
         dirtyObjects.remove(object);
         if (!removedObjects.contains(object)) {
             removedObjects.add(object);

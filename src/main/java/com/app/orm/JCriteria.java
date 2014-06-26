@@ -32,6 +32,7 @@ public class JCriteria {
 
     @Override
     public String toString() {
-        return field + " " + cqlOpertor + " " + value;
+        //Hard coding string by default need to find a better solution
+        return field + " " + cqlOpertor + " '" + value + "' ";
     }
 }

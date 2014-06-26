@@ -1,10 +1,12 @@
 package com.app.orm;
 
-import com.datastax.driver.core.SimpleStatement;
-import com.datastax.driver.core.Statement;
+import com.datastax.driver.core.*;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -14,8 +16,7 @@ import java.util.*;
 public class CassandraSession {
 
     private Map<String, DataMap> mappedEntities = Maps.newHashMap();
-    private JUnitOfWork JUnitOfWork;
-
+    private JUnitOfWork jUnitOfWork;
 
     public CassandraSession() throws ClassNotFoundException {
         initialized();
@@ -43,7 +44,7 @@ public class CassandraSession {
     public static void main(String... ar) throws ClassNotFoundException {
         CassandraSession cassandraSession = new CassandraSession();
         JQuery jQuery = cassandraSession.createQuery(User.class);
-        jQuery.addCriteria(JCriteria.equals("name", "don"));
+        jQuery.addCriteria(JCriteria.equals("userName", "johndoe"));
         List entities = jQuery.getResults();
         System.out.println(cassandraSession);
     }
@@ -53,17 +54,70 @@ public class CassandraSession {
     }
 
     public List getResult(JQuery jQuery) {
-        if (JUnitOfWork.getObject(jQuery.getIdentifier()) != null) {
-            return new ArrayList((Collection) JUnitOfWork.getObject(jQuery.getIdentifier()));
+        if (jUnitOfWork != null && jUnitOfWork.getObject(jQuery.getIdentifier()) != null) {
+            return new ArrayList((Collection) jUnitOfWork.getObject(jQuery.getIdentifier()));
         }
+        return execute(jQuery);
+    }
 
+    private List execute(JQuery jQuery) {
         // Need to move this loaders.
         String query = jQuery.generateSelectQuery();
         Statement statement = new SimpleStatement(query);
-        return null;
+        CassandraConnector cassandraConnector = new CassandraConnector();
+        Session session = cassandraConnector.getSession();
+        System.out.println(statement.toString());
+        ResultSet resultSet = session.execute(statement);
+        return resultToEntityMapper(resultSet, jQuery);
+    }
+
+    private List resultToEntityMapper(ResultSet resultSet, JQuery jQuery) {
+        List list = Lists.newArrayList();
+        for (Row row : resultSet) {
+            try {
+                list.add(createEntityFromRows(row, jQuery.getKlass()));
+            } catch (IllegalAccessException e) {
+
+            } catch (InstantiationException e) {
+
+            }
+        }
+        return list;
+    }
+
+    private Object createEntityFromRows(Row row, Class klass) throws IllegalAccessException, InstantiationException {
+        Object t = klass.newInstance();
+        DataMap dataMap = mappedEntities.get(klass.getSimpleName());
+        for (ColumnMap columnMap : dataMap.getColumnMaps()) {
+            ReflectionUtils.makeAccessible(columnMap.getField());
+            String typeName = columnMap.getField().getType().getSimpleName();
+            //System.out.println(typeName);
+            if (typeName.equalsIgnoreCase("String")) {
+                ReflectionUtils.setField(columnMap.getField(), t, row.getString(columnMap.getColumnName()));
+            }
+            if (typeName.equalsIgnoreCase("long")) {
+                ReflectionUtils.setField(columnMap.getField(), t, row.getLong(columnMap.getColumnName()));
+            }
+            if (typeName.equalsIgnoreCase("ByteBuffer")) {
+                ReflectionUtils.setField(columnMap.getField(), t, row.getBytes(columnMap.getColumnName()));
+            }
+        }
+        return t;
+    }
+
+    public static List<Field> getAllFields(List<Field> fields, Class<?> type) {
+        for (Field field : type.getDeclaredFields()) {
+            fields.add(field);
+        }
+
+        if (type.getSuperclass() != null) {
+            fields = getAllFields(fields, type.getSuperclass());
+        }
+        return fields;
     }
 
     public DataMap getDataMap(String entityName) {
         return mappedEntities.get(entityName);
     }
 }
+

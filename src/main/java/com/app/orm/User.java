@@ -3,7 +3,7 @@ package com.app.orm;
 /**
  * Created by cassandra on 6/23/14.
  */
-@JCassandraEntity(name = "userInfo")
+@JCassandraEntity(name = "userinfo")
 public class User {
 
     @JPrimaryKey(name = "id")

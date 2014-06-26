@@ -51,7 +51,7 @@ public class JQuery {
     }
 
     public String generateSelectQuery() {
-        String cql = "SELECT " + getAllFields() + " FROM " + getTableName() + " WHERE " + getCriterias() + " LIMIT 100";
+        String cql = "SELECT " + getAllFields() + " FROM " + getTableName() + " WHERE " + getCriterias() + " LIMIT 100;";
         return cql;
     }
 
@@ -61,14 +61,48 @@ public class JQuery {
     }
 
     public Object getTableName() {
-        return klass.getSimpleName();
+        return cassandraSession.getDataMap(klass.getSimpleName()).getTableName();
     }
 
     public String getCriterias() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuffer query = new StringBuffer();
+        int counter = 0;
         for (JCriteria c : this.criteria) {
-            stringBuffer.append(c.toString()).append(" AND ");
+            if (counter > 0) {
+                query.append(" AND ");
+            }
+            query.append(c.toString());
+            counter++;
         }
-        return stringBuffer.toString();
+
+        return query.toString();
+    }
+
+    public Class getKlass() {
+        return klass;
+    }
+
+    public void setKlass(Class klass) {
+        this.klass = klass;
+    }
+
+    public List<JCriteria> getCriteria() {
+        return criteria;
+    }
+
+    public void setCriteria(List<JCriteria> criteria) {
+        this.criteria = criteria;
+    }
+
+    public CassandraSession getCassandraSession() {
+        return cassandraSession;
+    }
+
+    public void setCassandraSession(CassandraSession cassandraSession) {
+        this.cassandraSession = cassandraSession;
+    }
+
+    public void setIdentifier(Long identifier) {
+        this.identifier = identifier;
     }
 }
